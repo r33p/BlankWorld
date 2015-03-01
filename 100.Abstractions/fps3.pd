@@ -1,0 +1,59 @@
+#N canvas 970 101 573 482 10;
+#X obj 101 101 cnv 15 198 15 empty empty empty 20 12 0 14 -257985 -66577
+0;
+#X obj 245 9 realtime;
+#X obj 245 -12 b;
+#X obj 290 -12 b;
+#X obj 245 100 nbx 5 17 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 22.817 256;
+#X obj 134 18 1000;
+#X obj 146 47 /;
+#X obj 134 -22 t b f;
+#X obj 146 100 nbx 5 17 -1e+37 1e+37 0 0 empty empty empty 0 -8 0 10
+-262144 -1 -1 43 256;
+#X text 117 100 fps;
+#X text 225 100 ms;
+#X obj 395 100 toggle2;
+#X text 352 100 ON/OFF;
+#X obj 245 57 spigot;
+#X obj 145 71 int;
+#X obj 149 117 hsl 128 17 0 300 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 1820 1;
+#X obj 129 117 tgl 17 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 63 210 spigot;
+#X obj 214 206 loadbang;
+#X msg 214 232 0;
+#X obj 332 254 vu 15 120 empty empty -1 -8 0 10 -66577 -1 0 0;
+#X floatatom 335 182 5 0 0 0 - - -;
+#X floatatom 294 177 5 0 0 0 - - -;
+#X obj 149 134 hsl 128 8 0 300 0 0 empty empty empty -2 -8 0 10 -262144
+-258113 -1 1070 1;
+#X msg 123 290 30;
+#X obj 245 -55 gemhead -9999;
+#X obj 290 -33 gemhead 9999;
+#X floatatom 281 124 5 0 0 0 - - -;
+#X connect 1 0 13 0;
+#X connect 2 0 1 0;
+#X connect 3 0 1 1;
+#X connect 4 0 7 0;
+#X connect 5 0 6 0;
+#X connect 6 0 14 0;
+#X connect 7 0 5 0;
+#X connect 7 1 6 1;
+#X connect 8 0 17 0;
+#X connect 11 0 13 1;
+#X connect 13 0 4 0;
+#X connect 14 0 8 0;
+#X connect 16 0 17 1;
+#X connect 17 0 15 0;
+#X connect 18 0 19 0;
+#X connect 18 0 24 0;
+#X connect 19 0 16 0;
+#X connect 21 0 20 1;
+#X connect 22 0 20 0;
+#X connect 23 0 27 0;
+#X connect 24 0 23 0;
+#X connect 25 0 2 0;
+#X connect 26 0 3 0;
+#X coords 0 -1 1 1 312 42 2 100 100;

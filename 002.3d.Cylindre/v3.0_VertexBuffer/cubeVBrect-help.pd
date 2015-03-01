@@ -1,0 +1,64 @@
+#N canvas 361 258 943 517 10;
+#X obj 25 71 gemwin;
+#X msg 35 50 destroy;
+#X msg 25 30 lighting 1 \, create \, 1;
+#X obj 287 29 gemhead;
+#X floatatom 322 200 5 0 0 0 - - -;
+#X floatatom 362 200 5 0 0 0 - - -;
+#X floatatom 402 200 5 0 0 0 - - -;
+#X obj 25 129 gemhead 5;
+#X obj 25 173 rotateXYZ;
+#X floatatom 42 151 5 0 0 0 - - -;
+#X floatatom 82 151 5 0 0 0 - - -;
+#X floatatom 122 151 5 0 0 0 - - -;
+#X obj 25 194 world_light;
+#X obj 364 18 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 364 38 openpanel;
+#X msg 364 59 open \$1;
+#X obj 301 125 loadbang;
+#X msg 301 146 rectangle 1;
+#X text 405 252 <- change color (RGBA);
+#X obj 287 171 pix_texture;
+#X obj 287 100 pix_image;
+#X obj 287 477 cubeVBrect 1;
+#X floatatom 356 455 5 0 0 0 - - -;
+#X text 398 454 <- change size;
+#X text 409 282 <- change color (RGB);
+#X msg 334 389 color 1 0 0 1 0 1 0 1 0 0 1 1 1 1 0 1 1 0 0 1 0 1 0
+1 0 0 1 1 1 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 1 1 0 1 1 0 0 1 0 1 0 1 0
+0 1 1 1 1 0 1 1 0 0 1 0 1 0 1 0 0 1 1 1 1 0 1 1 0 0 1 0 1 0 1 0 0 1
+1 1 1 0 1;
+#X text 700 405 <- change color (24 RGBA);
+#X msg 334 309 color 1 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 0 1 0 1 0 1 0
+1 0 1 0 1 0 1 0 1 0 0 1 1 0 0 1 1 0 0 1 1 0 0 1 1 1 0 0 1 1 0 0 1 1
+0 0 1 1 0 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 1 0 0 1 1 0 0 1 1 0 0 1
+1 0 0 1 1;
+#X text 702 326 <- change color (24 RGBA);
+#X obj 287 222 rotateXYZ 45 -45 0;
+#X msg 315 282 color 1 1 0;
+#X msg 305 252 color 1 0 0 0.5;
+#X connect 1 0 0 0;
+#X connect 2 0 0 0;
+#X connect 3 0 20 0;
+#X connect 4 0 29 1;
+#X connect 5 0 29 2;
+#X connect 6 0 29 3;
+#X connect 7 0 8 0;
+#X connect 8 0 12 0;
+#X connect 9 0 8 1;
+#X connect 10 0 8 2;
+#X connect 11 0 8 3;
+#X connect 13 0 14 0;
+#X connect 14 0 15 0;
+#X connect 15 0 20 0;
+#X connect 16 0 17 0;
+#X connect 17 0 19 0;
+#X connect 19 0 29 0;
+#X connect 20 0 19 0;
+#X connect 22 0 21 1;
+#X connect 25 0 21 0;
+#X connect 27 0 21 0;
+#X connect 29 0 21 0;
+#X connect 30 0 21 0;
+#X connect 31 0 21 0;

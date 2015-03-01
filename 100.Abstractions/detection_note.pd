@@ -1,0 +1,16 @@
+#N canvas 381 284 797 441 10;
+#X obj 303 136 spigot;
+#X obj 303 153 sel \$1;
+#X obj 303 196 outlet;
+#X obj 303 89 notein;
+#X obj 102 29 notein;
+#X floatatom 102 104 5 0 0 0 - - -;
+#X floatatom 118 79 5 0 0 0 - - -;
+#X floatatom 135 52 5 0 0 0 - - -;
+#X connect 0 0 1 0;
+#X connect 1 0 2 0;
+#X connect 3 0 0 0;
+#X connect 3 1 0 1;
+#X connect 4 0 5 0;
+#X connect 4 1 6 0;
+#X connect 4 2 7 0;

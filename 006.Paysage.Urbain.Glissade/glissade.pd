@@ -1,0 +1,74 @@
+#N canvas 847 78 599 771 10;
+#X obj -9 224 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X floatatom 100 -23 5 0 0 0 - - -;
+#X msg 106 14 1;
+#X obj 106 -3 loadbang;
+#X obj 18 252 s boumRotY;
+#X obj -13 270 s boumTransX;
+#X obj 343 199 s boumTransZ;
+#X obj 100 37 s sizeY;
+#X obj 108 283 s SetRndTransZ;
+#X obj 119 262 s SetRndTransX;
+#X obj 98 307 s SetRndRotY;
+#X obj 100 156 QuartTemps;
+#X obj 292 71 s GEMHEADglissade;
+#X obj 192 226 s YY;
+#X obj 111 196 nbx 4 17 -1e+37 1e+37 0 0 empty empty Espacement 0 -8
+1 9 -228856 -1 -1 42 256;
+#X obj 192 196 nbx 4 17 -1e+37 1e+37 0 0 empty empty Hauteur 0 -8 1
+9 -228856 -1 -1 0 256;
+#X obj 100 139 bpmgen;
+#X obj 239 100 toggle2;
+#X obj 100 117 taptempo;
+#X obj 180 156 QuartTemps;
+#X obj 314 160 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 261 309 hradio 17 1 0 5 empty empty empty 0 -8 0 10 -228856
+-1 -1 0;
+#X obj 284 374 s preset_pmpd;
+#X floatatom 249 330 5 0 0 0 - - -;
+#X obj 262 267 ./cube_glissadee;
+#X obj -23 377 ./cube_glissade_linee;
+#X obj -22 403 ./cube_simple_glissade_linee;
+#X obj 400 154 s init_Glissade;
+#X obj 401 112 loadbang;
+#X obj 471 119 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 77 432 ./cube_glissade;
+#X obj 77 492 ./cube_glissade;
+#X obj -23 432 ./cube_glissade;
+#X obj -23 452 ./cube_glissade;
+#X obj 77 452 ./cube_glissade;
+#X obj -23 472 ./cube_glissade;
+#X obj 77 472 ./cube_glissade;
+#X obj -23 492 ./cube_glissade;
+#X obj -23 512 ./cube_glissade;
+#X obj 77 512 ./cube_glissade;
+#X obj -23 532 ./cube_glissade;
+#X obj 77 532 ./cube_glissade;
+#X obj -23 552 ./cube_glissade;
+#X obj 77 552 ./cube_glissade;
+#X obj -23 572 ./cube_glissade;
+#X obj 77 572 ./cube_glissade;
+#X connect 0 0 4 0;
+#X connect 0 0 5 0;
+#X connect 1 0 7 0;
+#X connect 2 0 7 0;
+#X connect 3 0 2 0;
+#X connect 11 0 0 0;
+#X connect 14 0 9 0;
+#X connect 14 0 8 0;
+#X connect 15 0 13 0;
+#X connect 16 0 11 0;
+#X connect 16 0 19 0;
+#X connect 17 0 12 0;
+#X connect 17 0 16 1;
+#X connect 18 0 16 0;
+#X connect 19 0 20 0;
+#X connect 20 0 6 0;
+#X connect 21 0 22 0;
+#X connect 21 0 23 0;
+#X connect 28 0 27 0;
+#X connect 29 0 27 0;
+#X coords 0 -1 1 1 156 118 1 100 100;

@@ -1,0 +1,12 @@
+#N canvas 115 259 734 441 10;
+#X obj 207 70 ctlin 98 1;
+#X obj 297 70 ctlin 6 1;
+#X text 296 55 valeur;
+#X text 205 55 controleur;
+#X obj 234 127 pack f f;
+#X obj 234 170 route 8;
+#X obj 234 203 outlet;
+#X connect 0 0 4 0;
+#X connect 1 0 4 1;
+#X connect 4 0 5 0;
+#X connect 5 0 6 0;

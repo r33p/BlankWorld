@@ -1,0 +1,34 @@
+#N canvas 918 261 968 632 10;
+#X obj 87 3 inlet;
+#X obj 87 259 position_aleatoire;
+#X obj 159 292 loadbang;
+#X obj 159 309 symbol \$1;
+#X msg 159 326 open \$1;
+#X obj 87 343 model;
+#X obj 87 51 t a b;
+#X obj 87 153 gemlist;
+#X obj 87 131 until;
+#X obj 87 85 t b a;
+#X obj 337 60 s boooom;
+#X obj 337 42 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 87 25 separator;
+#X obj 336 107 s seeed;
+#X obj 336 88 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 85 107 50;
+#X connect 0 0 12 0;
+#X connect 1 0 5 0;
+#X connect 2 0 3 0;
+#X connect 3 0 4 0;
+#X connect 4 0 5 0;
+#X connect 6 0 9 0;
+#X connect 6 1 1 1;
+#X connect 7 0 1 0;
+#X connect 8 0 7 0;
+#X connect 9 0 15 0;
+#X connect 9 1 7 1;
+#X connect 11 0 10 0;
+#X connect 12 0 6 0;
+#X connect 14 0 13 0;
+#X connect 15 0 8 0;

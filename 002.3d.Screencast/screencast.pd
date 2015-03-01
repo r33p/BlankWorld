@@ -1,0 +1,60 @@
+#N canvas 696 145 832 738 10;
+#X obj 233 442 pix_video;
+#X obj 233 41 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 370 591 5 0 0 0 - - -, f 5;
+#X obj 233 587 separator;
+#X obj 233 542 pix_texture;
+#X obj 247 496 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 302 494 loadbang;
+#X msg 268 494 0;
+#X msg 247 517 quality \$1;
+#X msg 118 425 clearProps;
+#X obj 233 194 gemframebuffer;
+#X obj 254 267 pix_texture;
+#X obj 254 294 rectangle 4 4;
+#X obj 233 663 rectangle 40 40;
+#X obj 233 619 translateXYZ 0 0 -40;
+#X obj 254 216 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 416 299 s SCREEN;
+#X obj 233 64 gemhead 90 a;
+#X obj 254 239 gemhead;
+#X obj 252 132 loadbang;
+#X msg 252 158 perspec -1 1 -1 1 1 400;
+#X obj 544 95 gemwin a;
+#X msg 575 46 create \, 1;
+#X msg 623 70 destroy;
+#X msg 389 433 clearProps \, setProps screen-fps 20 \, setProps screen-caching
+200 \, setProps screen-follow-mouse \, setProps screen-left 0 \, setProps
+screen-top 0 \, setProps screen-width 256 \, setProps screen-height
+256 \, device screen://;
+#X msg 263 366 clearProps \, setProps screen-fps 30 \, setProps screen-caching
+50 \, setProps screen-follow-mouse \, setProps screen-left 0 \, setProps
+screen-top 0 \, setProps screen-width 128 \, setProps screen-height
+128 \, device screen://;
+#X connect 0 0 4 0;
+#X connect 1 0 17 0;
+#X connect 2 0 14 3;
+#X connect 3 0 14 0;
+#X connect 4 0 3 0;
+#X connect 5 0 8 0;
+#X connect 6 0 7 0;
+#X connect 7 0 5 0;
+#X connect 8 0 4 0;
+#X connect 9 0 0 0;
+#X connect 10 0 0 0;
+#X connect 10 1 11 1;
+#X connect 10 1 16 0;
+#X connect 11 0 12 0;
+#X connect 14 0 13 0;
+#X connect 15 0 18 0;
+#X connect 17 0 10 0;
+#X connect 18 0 11 0;
+#X connect 19 0 20 0;
+#X connect 20 0 10 0;
+#X connect 22 0 21 0;
+#X connect 23 0 21 0;
+#X connect 24 0 0 0;
+#X connect 25 0 0 0;

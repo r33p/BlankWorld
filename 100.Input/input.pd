@@ -1,0 +1,11 @@
+#N canvas 85 285 1193 579 10;
+#X declare -lib aubio;
+#X declare -lib zexy;
+#X declare -lib aubio;
+#X obj 38 163 ./audio_aubio/;
+#X obj 218 163 ./audio_bonk/analyse_audio_2;
+#X obj 219 190 ./audio_bonk/analyse_son;
+#X obj 875 155 ./gamepad/gamepad;
+#X obj 665 155 ./lpd8/lpd8_ctl;
+#X obj 665 185 ./lpd8/lpd8_pad;
+#X obj 502 161 ./electribe/;

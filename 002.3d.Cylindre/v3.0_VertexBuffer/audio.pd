@@ -1,0 +1,19 @@
+#N canvas 1042 74 450 300 10;
+#X obj 65 -200 osc~;
+#X floatatom 86 -225 5 0 0 0 - - -;
+#X obj 64 -172 dac~;
+#X floatatom 65 -251 5 0 0 0 - - -;
+#X obj 210 -161 adc~;
+#X obj 80 -87 env~;
+#X obj 221 -84 metro 30;
+#X obj 222 -104 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X obj 211 -57 tabwrite~ Y;
+#X obj 211 -128 *~ 100;
+#X connect 0 0 2 0;
+#X connect 1 0 0 1;
+#X connect 3 0 0 0;
+#X connect 4 0 9 0;
+#X connect 6 0 8 0;
+#X connect 7 0 6 0;
+#X connect 9 0 8 0;

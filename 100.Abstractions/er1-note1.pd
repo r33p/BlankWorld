@@ -1,0 +1,40 @@
+#N canvas 336 292 483 422 10;
+#X obj 123 177 cnv 15 130 50 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X obj 261 177 cnv 15 90 50 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X obj 181 241 cnv 15 170 25 empty empty empty 20 12 0 14 -233017 -66577
+0;
+#X floatatom 128 182 5 0 0 0 - - -, f 5;
+#X floatatom 169 182 5 0 0 0 - - -, f 5;
+#X floatatom 210 182 5 0 0 0 - - -, f 5;
+#X floatatom 210 206 5 0 0 0 - - -, f 5;
+#X floatatom 210 280 5 0 0 0 - - -, f 5;
+#X floatatom 306 182 5 0 0 0 - - -, f 5;
+#X floatatom 264 206 5 0 0 0 - - -, f 5;
+#X floatatom 307 206 5 0 0 0 - - -, f 5;
+#X obj 128 138 route 2 6 5 4 8 7 1 0 100 101;
+#X floatatom 265 245 5 0 0 0 - - -, f 5;
+#X floatatom 308 245 5 0 0 0 - - -, f 5;
+#X floatatom 128 68 0 0 0 0 - - -;
+#X obj 128 51 ctlin 98 1;
+#X floatatom 218 68 0 0 0 0 - - -;
+#X obj 218 51 ctlin 6 1;
+#X text 217 36 valeur;
+#X text 126 36 controleur;
+#X obj 128 101 pack f f;
+#X connect 11 0 3 0;
+#X connect 11 1 4 0;
+#X connect 11 2 5 0;
+#X connect 11 3 6 0;
+#X connect 11 4 7 0;
+#X connect 11 5 8 0;
+#X connect 11 6 9 0;
+#X connect 11 7 10 0;
+#X connect 11 8 12 0;
+#X connect 11 9 13 0;
+#X connect 14 0 20 0;
+#X connect 15 0 14 0;
+#X connect 16 0 20 1;
+#X connect 17 0 16 0;
+#X connect 20 0 11 0;
