@@ -1,0 +1,46 @@
+[file_prefs]
+final_new_line=true
+ensure_convert_new_lines=false
+strip_trailing_spaces=false
+replace_tabs=false
+
+[indentation]
+indent_width=4
+indent_type=1
+indent_hard_tab_width=8
+detect_indent=false
+detect_indent_width=false
+indent_mode=2
+
+[project]
+name=BlankWorld
+base_path=/home/rep/Projets/2015_BlankWorld
+description=
+file_patterns=
+
+[long line marker]
+long_line_behaviour=1
+long_line_column=72
+
+[files]
+current_page=1
+FILE_NAME_0=9946;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2F2015_BlankWorld%2FBlankWorld.cpp;0;4
+FILE_NAME_1=0;None;0;EUTF-8;1;1;0;%2Fhome%2Frep%2F.ssh%2Fid_rsa.pub;0;4
+
+[VTE]
+last_dir=/home/rep
+
+[build-menu]
+C++FT_00_LB=_Compiler
+C++FT_00_CM=g++ -Wall -c "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi
+C++FT_00_WD=
+filetypes=C++;
+C++FT_01_LB=_Construire
+C++FT_01_CM=g++ -Wall -o "%e" "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi
+C++FT_01_WD=
+EX_00_LB=_Exécuter
+EX_00_CM="./%e"
+EX_00_WD=
+C++FT_02_LB=
+C++FT_02_CM=
+C++FT_02_WD=
