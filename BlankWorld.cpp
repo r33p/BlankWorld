@@ -264,7 +264,7 @@ void setupScene(){
 	
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, textures[0]);
-	image = SOIL_load_image("hacheur1.png", &width, &height, 0, SOIL_LOAD_RGB);
+	image = SOIL_load_image("medias/hacheur1.png", &width, &height, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
     printf("\n dimensions image : %i x %i \n\n", width, height);
 	SOIL_free_image_data(image);
@@ -276,7 +276,7 @@ void setupScene(){
 
 	glActiveTexture(GL_TEXTURE1);
 	glBindTexture(GL_TEXTURE_2D, textures[1]);
-	image = SOIL_load_image("hacheur2.png", &width, &height, 0, SOIL_LOAD_RGB);
+	image = SOIL_load_image("medias/hacheur2.png", &width, &height, 0, SOIL_LOAD_RGB);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
 	printf("\n dimensions image : %i x %i \n\n", width, height);
 	SOIL_free_image_data(image);
