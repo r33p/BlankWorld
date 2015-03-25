@@ -1,4 +1,4 @@
-#N canvas 1 86 1593 764 10;
+#N canvas 1 94 1585 764 10;
 #X obj 28 74 gemhead;
 #X obj 298 43 loadbang;
 #X obj 28 279 t a b;
@@ -84,7 +84,7 @@ sequence.;
 #X obj 444 440 expr ( $f1 / 50) - 15.5;
 #X obj 28 214 rotateXYZ;
 #X floatatom 68 190 5 0 0 0 - - -, f 5;
-#X obj 28 -4 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0 1
+#X obj 28 -4 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1 1
 ;
 #X obj 693 626 abstractions/gemwin;
 #X msg 696 557 dimen 800 400 \, create \, 1;

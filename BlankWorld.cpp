@@ -12,6 +12,21 @@
 #include <math.h>
 #define NUM_SECONDS   (4)
 #define SAMPLE_RATE   (44100)
+// calcul du temps
+#include <time.h>
+#include <sys/time.h>
+// std
+#include <iostream>
+#include <cmath>
+#include <unistd.h>
+#include <cstdlib>
+#include <signal.h>
+#include <cstdio>
+//matrices
+#include <glm/glm.hpp>
+#define GLM_FORCE_RADIANS
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 typedef struct
 {
@@ -55,20 +70,7 @@ static int patestCallback( const void *inputBuffer, void *outputBuffer,
 static paTestData data;
 // fin du tru degueu
 
-// std
-#include <iostream>
-#include <cmath>
-#include <unistd.h>
-#include <cstdlib>
-#include <signal.h>
-#include <cstdio>
-//matrices
-#include <glm/glm.hpp>
 
-
-#define GLM_FORCE_RADIANS
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 // Shaders
 const GLchar* vertexSource =
@@ -321,7 +323,7 @@ int main()
 			// truc degueu portaudio
 
     PaStream *stream;
-    PaError err;
+//    PaError err;
     
     printf("PortAudio Test: output sawtooth wave.\n");
     /* Initialize our data for use by callback. */
@@ -333,26 +335,21 @@ int main()
 // ----------------------------------------------------------- MAIN LOOP
 	while(!glfwWindowShouldClose(window))
 	{
-			// truc degueu portaudio
-
-    
-    /* Open an audio I/O stream. */
-    Pa_OpenDefaultStream( &stream,
-                                0,          /* no input channels */
+		// mesure du temps d'execution
+		struct timeval start, end;
+		gettimeofday(&start, NULL);
+  
+		// truc degueu portaudio
+		/* Open an audio I/O stream. */
+		Pa_OpenDefaultStream( &stream,
+								0,          /* no input channels */
                                 2,          /* stereo output */
                                 paFloat32,  /* 32 bit floating point output */
                                 SAMPLE_RATE,
                                 256,        /* frames per buffer */
                                 patestCallback,
                                 &data );
- 
-
-// fin du truc degueu	
-
-		
-		
-		
-		
+        // fin du truc degueu
 		// clear screen au noir
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT); 
@@ -369,9 +366,27 @@ int main()
         
         // dessine le triangle avec les 3 vertices
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+        
+        // IMPORTANT : DOUBLE BUFFER - TIMING - REFRESH RATE
+        // regarder la fonction :
+        // glfwSwapInterval(1);
        
         glfwSwapBuffers(window);
 		glfwPollEvents();
+		
+		gettimeofday(&end, NULL);
+
+		//printf("\n %ld \n\n", ((end.tv_sec * 1000000 + end.tv_usec)
+		//	  - (start.tv_sec * 1000000 + start.tv_usec)));
+	
+		printf("  start.tv_sec    : %f\n",(double)start.tv_sec);
+		printf("  start.tv_usec   : %f\n",(double)start.tv_usec);
+		printf("  end.tv_sec      : %f\n",(double)end.tv_sec);
+		printf("  end.tv_usec     : %f\n",(double)end.tv_usec);
+		double tutu = (double)end.tv_usec-start.tv_usec;
+		printf("  end-start(usec) : %f microseconds\n",tutu);
+		printf("------------- FPS : %f \n",1000/(tutu/1000));
+		printf("\n");
 		}
 	
 	// ------------------------------------------------------- NETTOYAGE
@@ -390,5 +405,40 @@ int main()
 }
 
 
+/*
+int main(int argc, char **argv)
+{
+  if (argc < 1)
+    {
+      printf("USAGE: %s loop-iterations\n", argv[0]);
+      return 1;
+    }
+
+  int iterations = atoi(argv[1]);
+
+  struct timeval start, end;
+  
+  gettimeofday(&start, NULL);
+  
+  for (int i = 0; i < iterations; i++) { ;}
+  
+  gettimeofday(&end, NULL);
+
+  //printf("\n %ld \n\n", ((end.tv_sec * 1000000 + end.tv_usec)
+  //	  - (start.tv_sec * 1000000 + start.tv_usec)));
+  
+  printf("\n");
+  printf(" start.tv_sec : %f\n",(double)start.tv_sec);
+  printf("start.tv_usec : %f\n",(double)start.tv_usec);
+  printf("\n");
+  printf("   end.tv_sec : %f \n",(double)end.tv_sec);
+  printf("  end.tv_usec : %f\n",(double)end.tv_usec);
+  printf("\n");
+  double tutu = (double)end.tv_usec-start.tv_usec;
+  printf("  end_usec - start_usec : %f\n",tutu);
+
+  return 0;
+}
+*/
 
 
