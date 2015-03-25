@@ -174,7 +174,7 @@ void setupGLFW(){
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
+	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE); 	
 	// Windowed
 	window = glfwCreateWindow(800, 600, "Blank World", nullptr, nullptr); 
 	glfwMakeContextCurrent(window);
@@ -336,7 +336,7 @@ int main()
 	while(!glfwWindowShouldClose(window))
 	{
 		// mesure du temps d'execution
-		struct timeval start, end;
+		struct timeval start, draw, swap, end;
 		gettimeofday(&start, NULL);
   
 		// truc degueu portaudio
@@ -364,13 +364,18 @@ int main()
         //std::cout << "valc :" << valc << " valp :" << valp << std::endl;
         valp = valc;
         
+        gettimeofday(&draw, NULL);
+        
         // dessine le triangle avec les 3 vertices
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
-        
+        gettimeofday(&swap, NULL);
         // IMPORTANT : DOUBLE BUFFER - TIMING - REFRESH RATE
         // regarder la fonction :
         // glfwSwapInterval(1);
-       
+        
+        // double buffer si = 1
+        glfwSwapInterval(1);
+        
         glfwSwapBuffers(window);
 		glfwPollEvents();
 		
@@ -379,13 +384,13 @@ int main()
 		//printf("\n %ld \n\n", ((end.tv_sec * 1000000 + end.tv_usec)
 		//	  - (start.tv_sec * 1000000 + start.tv_usec)));
 	
-		printf("  start.tv_sec    : %f\n",(double)start.tv_sec);
-		printf("  start.tv_usec   : %f\n",(double)start.tv_usec);
-		printf("  end.tv_sec      : %f\n",(double)end.tv_sec);
-		printf("  end.tv_usec     : %f\n",(double)end.tv_usec);
-		double tutu = (double)end.tv_usec-start.tv_usec;
-		printf("  end-start(usec) : %f microseconds\n",tutu);
-		printf("------------- FPS : %f \n",1000/(tutu/1000));
+		//printf("  start.tv_sec    : %f\n",(double)start.tv_sec);
+		//printf("  start.tv_usec   : %f\n",(double)start.tv_usec);
+		printf("  init  = %10.0f\n",(double)draw.tv_usec-start.tv_usec);
+		printf("  draw  + %10.0f\n",(double)swap.tv_usec-draw.tv_usec);
+		printf("  swap  + %10.0f\n",(double)end.tv_usec-swap.tv_usec);
+		printf("        ------------\n");
+		printf("  total = %10.0f microseconds     > %10.0f FPS\n",(double)end.tv_usec-start.tv_usec,1000/(((double)end.tv_usec-start.tv_usec)/1000));
 		printf("\n");
 		}
 	

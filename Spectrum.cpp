@@ -1,4 +1,4 @@
-// LINKAGE STATIQUE DE GLEW
+// GLEW STATIC LINK
 #define GLEW_STATIC
 // opengl
 #include <GL/glew.h>
@@ -16,6 +16,12 @@
 #define GLM_FORCE_RADIANS
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+//RtAudio
+#include "RtAudio.h"
+#include "RtWvIn.h"
+#include "FileWvOut.h"
+
+
 
 // Shaders
 const GLchar* vertexSource =
@@ -43,10 +49,8 @@ const GLchar* fragmentSource =
     "   outColor = outColor = vec4(Color, 1.0);"
     "}";
 
-
 // GLOBALE GLFW
 GLFWwindow* window;
-
 // OGL
 GLint modelTrans;
 GLint uniTime;
@@ -62,7 +66,6 @@ GLuint vao;
 GLuint vertexShader;
 GLuint fragmentShader;
 GLuint shaderProgram;
-
 
 void setupGLFW(){
 	// ------------------------------------------------------- INIT GLFW
@@ -241,9 +244,6 @@ void setupScene(){
 // ------------------------------------------------------------ PROJ
 	proj = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 1.0f, 10.0f);
 	}
-
-
-
 
 void setupGlobal(){
 	setupGLFW();
