@@ -22,6 +22,7 @@
 */
 /******************************************/
 
+#include "RtAudio.h"
 #include "RtWvIn.h"
 #include "FileWvOut.h"
 #include <cstdlib>
@@ -48,7 +49,7 @@ int main( int argc, char *argv[] )
 
   unsigned int channels = (unsigned int) atoi( argv[1] );
   double sampleRate = atof( argv[4] );
-  double time = atof( argv[3] );
+//  double time = atof( argv[3] );
   long samples, i;
   StkFrames frame( 1, channels );
 

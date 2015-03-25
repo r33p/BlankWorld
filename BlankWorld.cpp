@@ -309,7 +309,7 @@ void setupScene(){
 
 
 void setupGlobal(){
-	setupMidi();
+	//setupMidi();
 	setupGLFW();
 	setupScene();
 	}

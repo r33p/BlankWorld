@@ -14,7 +14,7 @@ indent_mode=2
 
 [project]
 name=BlankWorld
-base_path=/home/rep/Projets/2015_BlankWorld
+base_path=/home/rep/Projets/BlankWorld/BlankWorld
 description=
 file_patterns=
 
@@ -23,22 +23,19 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=2
-FILE_NAME_0=2616;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.cpp;0;4
-FILE_NAME_1=141;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2Fmatrix.cpp;0;4
-FILE_NAME_2=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FSTK%2Frecord.cpp;0;4
-FILE_NAME_3=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FSTK%2Fsteak.cpp;0;4
+current_page=0
+FILE_NAME_0=10911;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FBlankWorld.cpp;0;4
 
 [VTE]
 last_dir=/home/rep
 
 [build-menu]
 C++FT_00_LB=_Compiler
-C++FT_00_CM=g++ -Wall -c "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi
+C++FT_00_CM=g++ -Wall -c "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lportaudio
 C++FT_00_WD=
 filetypes=C++;
 C++FT_01_LB=_Construire
-C++FT_01_CM=g++ -Wall -o "%e" "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi
+C++FT_01_CM=g++ -Wall -o "%e" "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lportaudio
 C++FT_01_WD=
 EX_00_LB=_Exécuter
 EX_00_CM="./%e"
