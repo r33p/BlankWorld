@@ -12,21 +12,12 @@
 #include <cstdlib>
 #include <cstring>
 
-typedef signed short  MY_TYPE;
-#define FORMAT RTAUDIO_SINT16
-#define SCALE  32767.0
-
-
 signed short* buuff;
 
 int record( void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus status, void *userData )
 {
 	unsigned int i, j;
 	signed short *buffer = (signed short *) inputBuffer;
-	//double *data = (double *) userData;
-	
-//	signed short *maData = (signed short *) userData;
-
 	
 	if ( status )
 	std::cout << "Stream overflow detected!" << std::endl;

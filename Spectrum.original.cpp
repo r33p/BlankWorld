@@ -11,7 +11,6 @@
 #include <cstdlib>
 #include <signal.h>
 #include <cstdio>
-#include <cstring>
 //matrices
 #include <glm/glm.hpp>
 #define GLM_FORCE_RADIANS
@@ -23,7 +22,6 @@
 // calcul du temps
 #include <time.h>
 #include <sys/time.h>
-
 
 // Shaders Sources
 const GLchar* vertexSource =
@@ -72,36 +70,6 @@ int device = 0;        // 0 indicates default or first available device
 double data[2];
 char input;
 RtAudio *audio = 0;
-// SERT A STOCKER LE BUFFER AUDIO :
-signed short buuff[1024];
-
-
-int record( void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus status, void *userData )
-{
-	unsigned int i, j,x;
-	signed short *buffer = (signed short *) inputBuffer;
-	//signed short *tmp = buuff;
-	x=0;
-	if ( status ){
-		std::cout << "Stream overflow detected!" << std::endl;
-	}// Do something with the data in the "inputBuffer" buffer.	
-	//std::cout << "REC__________________________________\n\n\n\n";
-	for ( i=0; i<nBufferFrames; i++ ) {
-		for ( j=0; j<2; j++ ) {
-			//std::cout << (float)*buffer/100<< " ";
-			buuff[x] = *buffer; 
-			//std::cout << (float)*buuff/100<< " ";
-			x++;
-			buffer++;
-			//printf("%d ", buuff[i]);
-		}
-	}
-	//std::cout << "\n" << nBufferFrames;
-	//std::cout << "REC__________________________________END\n\n\n\n";
-	//std::cout << "\n\n\n\n";
-	return 0;
-}
-
 
 void setupGLFW(){
 	// ------------------------------------------------------- INIT GLFW
@@ -125,7 +93,7 @@ void setupVBO(){
 	glGenBuffers(1, &vbo); // Generate 1 buffer
 	// -------------------------------------------------------- VERTICES
  	for (int i=0;i<1024;i++){
-		vertices[i*7] = ((float)i/512) - 1.0; 
+		vertices[i*7] = ((float)i/1024) - 0.5; 
 		vertices[i*7+1] = 0.0;
 		vertices[i*7+2] = 1.0;
 		vertices[i*7+3] = 1.0;
@@ -136,7 +104,7 @@ void setupVBO(){
 		vertices[0*7+1]=0.3;
 		vertices[1023*7+1]=0.3;
 	for (int i=0;i<10;i++){
-		//printf("\n X:%f Y:%f R:%f G:%f B:%f U:%f V:%f", vertices[i*7],vertices[i*7+1],vertices[i*7+2],vertices[i*7+3],vertices[i*7+4],vertices[i*7+5],vertices[i*7+6]);
+		printf("\n X:%f Y:%f R:%f G:%f B:%f U:%f V:%f \n\n", vertices[i*7],vertices[i*7+1],vertices[i*7+2],vertices[i*7+3],vertices[i*7+4],vertices[i*7+5],vertices[i*7+6]);
 	}
 	// rendre le buffer nouvellement créé, le buffer actif
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
@@ -235,25 +203,24 @@ void setupAUDIO(){
 }
 
 void setupGlobal(){
-	setupAUDIO();
+	//setupAUDIO();
 	setupGLFW();
 	setupVBO();
-	setupSHADERS();
 	setupScene();
 	}
 
 void updateVBO(){
-	//std::cout << "VBO__________________________________\n\n\n\n";
+	
+	// ICI L'APPEL AU CALLBACK
+	
+	// -----------------------
+	
 	for (int i=0;i<1024;i++){
-		
-		vertices[i*7+1] = (float)buuff[i] / 4096;//10000000000000000;
-		//printf("%d ", buuff[i]);
-//		vertices[i*7+1]= (float)(rand() % 100)/200;
+		vertices[i*7+1]= (float)(rand() % 100)/200;
 //		vertices[i*7+1]= ((sin((float)i/64))/3)+((float)(rand() % 100)/1000);
 		}
 		
-		//printf("\n");
-		//std::cout << "VBO__________________________________END\n\n\n\n";
+		
 	}
 
 void nettoyage(){
@@ -271,68 +238,34 @@ int main(){
 	setupGlobal();
 	uniTime = glGetUniformLocation(shaderProgram, "time");                  
 	
-	
-	RtAudio adc;
-		if ( adc.getDeviceCount() < 1 ) {
-			std::cout << "\nNo audio devices found!\n";
-			exit( 0 );
-		}
-		
-		RtAudio::StreamParameters parameters;
-		parameters.deviceId = adc.getDefaultInputDevice();
-		
-		unsigned int sampleRate = 44100;
-		unsigned int bufferFrames = 512; // 512 sample frames
-		parameters.nChannels = 2;
-		parameters.firstChannel = 0;
-		
-		try {
-			adc.openStream( NULL, &parameters, RTAUDIO_SINT16,
-			sampleRate, &bufferFrames, &record );
-			adc.startStream();
-		}
-		catch ( RtAudioError& e ) {
-			e.printMessage();
-			exit( 0 );
-		}
-		/*
-		 * char input;
-		std::cout << "\nRecording ... press <enter> to quit.\n";
-		std::cin.get( input );
-		*/
-		
-		
 // ----------------------------------------------------------- MAIN LOOP
 	while(!glfwWindowShouldClose(window))
 	{
-	
 		// mesure du temps d'execution
 		struct timeval start, draw, swap, end;
 		gettimeofday(&start, NULL);
 		
-		
-		
 		// update du VBO et re-upload des data
-		updateVBO();
+		//updateVBO();
 		// UPLOAD des nouvelles donées ! IMPORTANT
-		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+		//glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 		
 		// clear screen au noir
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT); 
         
         glUniform1f(uniTime, (GLfloat)clock() / (GLfloat)CLOCKS_PER_SEC);
      
 		glUniformMatrix4fv(uniProj, 1, GL_FALSE, glm::value_ptr(proj));
 		glUniformMatrix4fv(uniView, 1, GL_FALSE, glm::value_ptr(view));
         
-        //trans = glm::rotate(trans, glm::degrees(0.0001f), glm::vec3(0.0f, 0.0f, 1.0f));
+        trans = glm::rotate(trans, glm::degrees(0.0001f), glm::vec3(0.0f, 0.0f, 1.0f));
         glUniformMatrix4fv(modelTrans, 1, GL_FALSE, glm::value_ptr(trans));
        
         gettimeofday(&draw, NULL);
         
         // dessine le triangle avec les 3 vertices
-        glDrawElements(GL_LINE_LOOP, 1024, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_LINES, 1024, GL_UNSIGNED_INT, 0);
        
         gettimeofday(&swap, NULL);
         
@@ -346,28 +279,21 @@ int main(){
 	
 		//printf("  start.tv_sec    : %f\n",(double)start.tv_sec);
 		//printf("  start.tv_usec   : %f\n",(double)start.tv_usec);
-		/*
-		 * printf("  init  = %10.0f\n",(double)draw.tv_usec-start.tv_usec);
+		printf("  init  = %10.0f\n",(double)draw.tv_usec-start.tv_usec);
 		printf("  draw  + %10.0f\n",(double)swap.tv_usec-draw.tv_usec);
 		printf("  swap  + %10.0f\n",(double)end.tv_usec-swap.tv_usec);
 		printf("        ------------\n");
 		printf("  total = %10.0f microseconds     > %10.0f FPS\n",(double)end.tv_usec-start.tv_usec,1000/(((double)end.tv_usec-start.tv_usec)/1000));
 		printf("\n");
-		*/
+		
+		
+		
 		}
 	
 	// ------------------------------------------------------- NETTOYAGE
 	nettoyage();
-	try {
-		// Stop the stream
-		adc.stopStream();
-	}
-	catch (RtAudioError& e) {
-		e.printMessage();
-	}
-	if ( adc.isStreamOpen() ) adc.closeStream();
-	return 0;
 }
+
 
 
 

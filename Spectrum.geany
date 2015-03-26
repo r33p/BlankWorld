@@ -23,18 +23,19 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=0
-FILE_NAME_0=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FRtAudio%2Fetst_rtaudio_callback_input.cpp;0;4
+current_page=1
+FILE_NAME_0=994;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2Frtaudio_callback_input.cpp;0;4
+FILE_NAME_1=40;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.cpp;0;4
 
 [VTE]
 last_dir=/home/rep
 
 [build-menu]
 C++FT_00_LB=_Compiler
-C++FT_00_CM=g++ -Wall -c "%f" -std=c++11 -D__LINUX_ALSA__ -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lstk -lpthread -lasound -lm -I /usr/includes/stk
+C++FT_00_CM=g++ -Wall -c "%f" -std=c++11 -D__LINUX_ALSA__ -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
 C++FT_00_WD=
 C++FT_01_LB=_Construire
-C++FT_01_CM=g++ -Wall -o "%e" "%f" -std=c++11 -D__LINUX_ALSA__  -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lstk -lpthread -lasound -lm -I /usr/includes/stk
+C++FT_01_CM=g++ -Wall -o "%e" "%f" -std=c++11 -D__LINUX_ALSA__  -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
 C++FT_01_WD=
 filetypes=C++;
 EX_00_LB=_Exécuter
