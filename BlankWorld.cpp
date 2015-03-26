@@ -28,50 +28,6 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-typedef struct
-{
-    float left_phase;
-    float right_phase;
-}
-paTestData;
-
-/* This routine will be called by the PortAudio engine when audio is needed.
-** It may called at interrupt level on some machines so don't do anything
-** that could mess up the system like calling malloc() or free().
-*/
-static int patestCallback( const void *inputBuffer, void *outputBuffer,
-                           unsigned long framesPerBuffer,
-                           const PaStreamCallbackTimeInfo* timeInfo,
-                           PaStreamCallbackFlags statusFlags,
-                           void *userData )
-{
-    /* Cast data passed through stream to our structure. */
-    paTestData *data = (paTestData*)userData;
-    float *out = (float*)outputBuffer;
-    unsigned int i;
-    (void) inputBuffer; /* Prevent unused variable warning. */
-
-    for( i=0; i<framesPerBuffer; i++ )
-    {
-        *out++ = data->left_phase;  /* left */
-        *out++ = data->right_phase;  /* right */
-        /* Generate simple sawtooth phaser that ranges between -1.0 and 1.0. */
-        data->left_phase += 0.01f;
-        /* When signal reaches top, drop back down. */
-        if( data->left_phase >= 1.0f ) data->left_phase -= 2.0f;
-        /* higher pitch so we can distinguish left and right. */
-        data->right_phase += 0.03f;
-        if( data->right_phase >= 1.0f ) data->right_phase -= 2.0f;
-    }
-    return 0;
-}
-
-/*******************************************************************/
-static paTestData data;
-// fin du tru degueu
-
-
-
 // Shaders
 const GLchar* vertexSource =
     "#version 150 core\n"
@@ -147,19 +103,16 @@ void mycallback( double deltatime, std::vector< unsigned char > *message, void *
 void setupMidi(){
 	midiin = new RtMidiIn();
 	midiin->setCallback(&mycallback);
-	
 	// Check available ports.
 	unsigned int nPorts = midiin->getPortCount();
 	if ( nPorts == 0 ) {
 		std::cout << "No ports available!\n";
 		delete midiin;
 	}
-	// index du port que l'on ouvre
-	midiin->openPort( 1 );
+	midiin->openPort( 1 ); // index du port que l'on ouvre
 	// Don't ignore sysex, timing, or active sensing messages.
 	midiin->ignoreTypes( false, false, false );
-	// Install an interrupt handler function.
-	done = false;
+	done = false;// Install an interrupt handler function.
 	(void) signal(SIGINT, finish);
 	// Periodically check input queue.
 	std::cout << "Reading MIDI from port ... quit with Ctrl-C.\n";
@@ -320,16 +273,6 @@ int main()
 {
 	setupGlobal();
 	uniTime = glGetUniformLocation(shaderProgram, "time");                  
-			// truc degueu portaudio
-
-    PaStream *stream;
-//    PaError err;
-    
-    printf("PortAudio Test: output sawtooth wave.\n");
-    /* Initialize our data for use by callback. */
-    data.left_phase = data.right_phase = 0.0;
-
-    // fin truc port audio
 
 
 // ----------------------------------------------------------- MAIN LOOP
@@ -339,17 +282,6 @@ int main()
 		struct timeval start, draw, swap, end;
 		gettimeofday(&start, NULL);
   
-		// truc degueu portaudio
-		/* Open an audio I/O stream. */
-		Pa_OpenDefaultStream( &stream,
-								0,          /* no input channels */
-                                2,          /* stereo output */
-                                paFloat32,  /* 32 bit floating point output */
-                                SAMPLE_RATE,
-                                256,        /* frames per buffer */
-                                patestCallback,
-                                &data );
-        // fin du truc degueu
 		// clear screen au noir
 		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT); 

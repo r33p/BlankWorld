@@ -24,18 +24,19 @@ long_line_column=72
 
 [files]
 current_page=0
-FILE_NAME_0=180;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.cpp;0;4
+FILE_NAME_0=6614;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.cpp;0;4
+FILE_NAME_1=273;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FBlankWorld.cpp;0;4
 
 [VTE]
 last_dir=/home/rep
 
 [build-menu]
 C++FT_00_LB=_Compiler
-C++FT_00_CM=g++ -Wall -c "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lportaudio
+C++FT_00_CM=g++ -Wall -c "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio
 C++FT_00_WD=
 filetypes=C++;
 C++FT_01_LB=_Construire
-C++FT_01_CM=g++ -Wall -o "%e" "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lportaudio
+C++FT_01_CM=g++ -Wall -o "%e" "%f" -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio
 C++FT_01_WD=
 EX_00_LB=_Exécuter
 EX_00_CM="./%e"
