@@ -2,7 +2,7 @@
 
 rm $0
 
-/bin/bash "./Spectrum"
+./"Spectrum.instable"
 
 echo "
 

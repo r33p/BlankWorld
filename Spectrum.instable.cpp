@@ -1,15 +1,19 @@
-////////////////////////////////////////////////////////////////////////
-// BUILD ALSA
-// g++ -Wall -c "%f" -std=c++11 -D__LINUX_ALSA__ -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
-// g++ -Wall -o "%e" "%f" -std=c++11 -D__LINUX_ALSA__  -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
-// BUILD JACK
-// g++ -Wall -D__UNIX_JACK__ -c  "%f" $(pkg-config –cflags –libs jack) -lpthread -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
-// g++ -Wall -D__UNIX_JACK__ -o  "%e" "%f" $(pkg-config –cflags –libs jack) -lpthread -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
-////////////////////////////////////////////////////////////////////////
-//
-////////////////////////////////////////////////////////////////////////
+/*
+ * APITRACE
+ * LD_PRELOAD=~/Apps/apitrace/apitrace/wrappers/glxtrace.so ./Spectrum.instable
+ * ~/Apps/apitrace/apitrace/build/apitrace replay ./Spectrum.instable.trace  
+ * 
+ * BUILD ALSA
+ * g++ -Wall -c "%f" -std=c++11 -D__LINUX_ALSA__ -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
+ * g++ -Wall -o "%e" "%f" -std=c++11 -D__LINUX_ALSA__  -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
+ * 
+ * BUILD JACK
+ * g++ -Wall -D__UNIX_JACK__ -c  "%f" $(pkg-config –cflags –libs jack) -lpthread -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
+ * g++ -Wall -D__UNIX_JACK__ -o  "%e" "%f" GLShader.cpp $(pkg-config –cflags –libs jack) -lpthread -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
+ * 
+ */
+
 #include "GLShader.hpp"
-////////////////////////////////////////////////////////////////////////
 // GLEW STATIC LINK
 #define GLEW_STATIC
 // opengl
@@ -27,43 +31,14 @@
 #include <math.h> // matrices
 // calcul du temps
 #include <sys/time.h>
-////////////////////////////////////////////////////////////////////////
-
-// Shaders Sources
-//std::string vertex2;
-const GLchar* vertex2;
-const GLchar* vertexSource =
-    "#version 150 core\n"
-    "in vec2 texcoord;"
-    "in vec2 position;"
-    "in vec3 color;"
-    "out vec3 Color;"
-    "out vec2 Texcoord;"
-    "uniform mat4 model;"
-	"uniform mat4 view;"
-	"uniform mat4 proj;"
-	"uniform float mydata[1024];"
-    "void main() {"
-    "   Color = color;"
-    "   Texcoord = texcoord;"
-    "   gl_Position = model * vec4(position, 0.0, 1.0);"
-    "}";
-const GLchar* fragmentSource =
-    "#version 150 core\n"
-    "in vec3 Color;"
-    "in vec2 Texcoord;"
-    "out vec4 outColor;"
-    "uniform float time;"
-    "void main() {"
-    "   outColor = outColor = vec4(Color, 1.0);"
-    "}";
 
 // GLOBALES 3D
 GLFWwindow* window; 										// GLFW
-GLint 		modelTrans,	uniTime,	uniView,	uniProj;	// OGL
+GLint 		uniModel,	uniView,	uniProj,	uniTime;	// OGL
+GLuint textures[2];											// TEXTURES
 glm::mat4 	trans,		model,		view, 		proj;		// MATRICES
 GLuint 		vbo, 		ebo, 		vao;					// VBO
-GLuint 		vertexShader,	fragmentShader,	program;	// SHADERS
+GLuint 		vertexShader,	fragmentShader,	programGLSL;	// SHADERS
 // GLOBALES VBO (DATA)
 const int samples=1024;
 float vertices[samples*7];
@@ -82,7 +57,7 @@ signed short buuff[1024];
 // TIMESTAMPS (DEBUG)
 struct timeval start, draw, swap, end;
 
-int record( void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus status, void *userData ){
+int SoundInput( void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus status, void *userData ){
 	signed short *buffer = (signed short *) inputBuffer;
 	if ( status ){
 		std::cout << "Stream overflow detected!" << std::endl;
@@ -92,7 +67,7 @@ int record( void *outputBuffer, void *inputBuffer, unsigned int nBufferFrames, d
 	return 0;
 }
 
-void setupGLFW(){
+void setup_GLFW(){
 	// ------------------------------------------------------- INIT GLFW
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -101,29 +76,32 @@ void setupGLFW(){
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	// Windowed
-	window = glfwCreateWindow(800, 600, "Blank World", nullptr, nullptr); 
+	window = glfwCreateWindow(1024, 512, "Blank World", nullptr, nullptr); 
 	glfwMakeContextCurrent(window);
 	// ------------------------------------------------------- INIT GLEW
 	glewExperimental = GL_TRUE;
 	glewInit();
 }
 
-void setupVBO(){
+void setup_VBO(){
 	// ------------------------------------------------------------- VBO
 	// création du VBO
 	glGenBuffers(1, &vbo); // Generate 1 buffer
 	// -------------------------------------------------------- VERTICES
  	for (int i=0;i<1024;i++){
-		vertices[i*7] = ((float)i/512) - 1.0; 
-		vertices[i*7+1] = 0.0;
-		vertices[i*7+2] = 1.0;
-		vertices[i*7+3] = 1.0;
-		vertices[i*7+4] = 1.0;
-		vertices[i*7+5] = 1.0;
-		vertices[i*7+6] = 1.0;
+		vertices[i*7] = ((float)i/512) - 1.0; 	// X	
+		vertices[i*7+1] = 0.0;					// Y
+		// -----------------------------------------
+		vertices[i*7+2] = 1.0;					// R
+		vertices[i*7+3] = 1.0;					// G
+		vertices[i*7+4] = 1.0;					// B
+		// -----------------------------------------
+		vertices[i*7+5] = 1.0;					// U
+		vertices[i*7+6] = 1.0;					// V
 	}
-		vertices[0*7+1]=0.3;
-		vertices[1023*7+1]=0.3;
+		//vertices[0*7+1]=0.3;
+		//vertices[1023*7+1]=0.3;
+		
 	for (int i=0;i<10;i++){
 		//printf("\n X:%f Y:%f R:%f G:%f B:%f U:%f V:%f", vertices[i*7],vertices[i*7+1],vertices[i*7+2],vertices[i*7+3],vertices[i*7+4],vertices[i*7+5],vertices[i*7+6]);
 	}
@@ -145,90 +123,37 @@ void setupVBO(){
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(elements), elements, GL_STATIC_DRAW);
 	
-	}
+}
 
+void setup_GLSL(){
+	programGLSL = LoadShader("BlankWorld.vert", "BlankWorld.frag");
+	printf("PROGRAM GLSL USE: %i \n",programGLSL);
+	glUseProgram(programGLSL);
 
-//bool loadShaderSource(const std::string& fileName, std::string& vertexsourcecontent){
-bool loadShaderSource(const std::string& fileName, const GLchar* vertexsourcecontent){
-	std::ifstream fichier;
-	fichier.open(fileName.c_str());
-	
-	if (! fichier) {return false;}
-	return true;
-	
-	std::stringstream stream;
-	stream <<  fichier.rdbuf();
-	fichier.close();
-//	vertexsourcecontent = stream.str();
-	return true;
-	}
-
-void setupGLSL(){
-	
-	
-	GLuint program = LoadShader("BlankWorld.vert", "BlankWorld.frag");
-	glUseProgram(program);
-	
-	/*
-	loadShaderSource("simple.vert", vertex2);
-	*/
-	
-	// LOAD FROM FILES :
-	// http://www.gamedev.net/topic/568188-loading-glsl-shader-from-file-c/
-	// http://www.nexcius.net/2012/11/20/how-to-load-a-glsl-shader-in-opengl-using-c/
-	// http://lazyfoo.net/tutorials/OpenGL/index.php#Loading%20Text%20File%20Shaders
-	// --------------------------------------------------------- SHADERS
-	// Create and compile the vertex shader
-    
-    
-    /*
-    vertexShader = glCreateShader(GL_VERTEX_SHADER);
-    glShaderSource(vertexShader, 1, &vertexSource, NULL);
-    glCompileShader(vertexShader);
-    GLint statusVERT;
-    glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &statusVERT);
-    printf("\n VERT : %u \n", statusVERT); // retour d'erreurs des shaders
-    // Create and compile the fragment shader
-    fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-    glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
-    glCompileShader(fragmentShader);
-    GLint statusFRAG;
-    glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &statusFRAG);
-    printf("\n FRAG : %u \n", statusFRAG);
-    // Link the vertex and fragment shader into a shader program
-    shaderProgram = glCreateProgram();
-    glAttachShader(shaderProgram, vertexShader);
-    glAttachShader(shaderProgram, fragmentShader);
-    glBindFragDataLocation(shaderProgram, 0, "outColor");
-    glLinkProgram(shaderProgram);
-    glUseProgram(shaderProgram);
-    */
 	// -------------------------------------------------- VERTEX ATTRIBS	
-	GLint posAttrib = glGetAttribLocation(program, "position");
+	GLint posAttrib = glGetAttribLocation(programGLSL, "position");
 	glEnableVertexAttribArray(posAttrib);
 	// comment sont formatées nos données de vertex :
-	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), 0);
+	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7* sizeof(GLfloat), 0);
 	// ------------------------------------------------ FRAGMENT ATTRIBS	
-	GLint colAttrib = glGetAttribLocation(program, "color");
+	GLint colAttrib = glGetAttribLocation(programGLSL, "color");
     glEnableVertexAttribArray(colAttrib);
     glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
     // ------------------------------------------------- TEXTURE ATTRIBS
-    GLint texAttrib = glGetAttribLocation(program, "texcoord");
+    GLint texAttrib = glGetAttribLocation(programGLSL, "texcoord");
     glEnableVertexAttribArray(texAttrib);
     glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7*sizeof(float), (void*)(5*sizeof(float)));
 }
 
-void setupScene(){
+void setup_MATRICES(){
 	// ---------------------------------------------------------- IMAGES 
-    GLuint textures[2];
 	glGenTextures(2, textures);
-    
 	// -------------------------------------------------------- MATRICES
-	modelTrans = glGetUniformLocation(program, "model");
-	uniProj = glGetUniformLocation(program, "proj");
-	uniView = glGetUniformLocation(program, "view");
+	uniModel	= glGetUniformLocation(programGLSL, "model");
+	uniView		= glGetUniformLocation(programGLSL, "view");
+	uniProj		= glGetUniformLocation(programGLSL, "proj");
 	// ----------------------------------------------------------- MODEL
-	glUniformMatrix4fv(modelTrans, 1, GL_FALSE, glm::value_ptr(model));
+	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
 	// ----------------------------------------------------------- VIEW
     view = glm::lookAt(
     glm::vec3(1.2f, 1.2f, 1.2f),
@@ -238,9 +163,9 @@ void setupScene(){
 	proj = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 1.0f, 10.0f);
 	}
 
-void setupAUDIO(){
+void setup_AUDIO(){
 	if ( adc.getDeviceCount() < 1 ) {
-		std::cout << "\nNo audio devices found!\n";
+		std::cout << "\nNo audio devices found!\n";	
 		exit( 0 );
 	}
 	RtAudio::StreamParameters parameters;
@@ -251,7 +176,7 @@ void setupAUDIO(){
 	parameters.firstChannel = 0;
 	try {
 		adc.openStream( NULL, &parameters, RTAUDIO_SINT16,
-		sampleRate, &bufferFrames, &record );
+		sampleRate, &bufferFrames, &SoundInput );
 		adc.startStream();
 	}
 	catch ( RtAudioError& e ) {
@@ -260,18 +185,17 @@ void setupAUDIO(){
 }
 
 void setup(){
-	setupAUDIO();
-	setupGLFW();
-	setupVBO();
-	setupGLSL();
-	setupScene();
+	setup_AUDIO();
+	setup_GLFW();
+	setup_VBO();
+	setup_GLSL();
+	setup_MATRICES();
 	}
 
 void updateVBO(){
 	for (int i=0;i<1024;i++){
-		
 		//~ vertices[i*7+1] = (float)buuff[i] / 4096;
-		vertices[i*7+1] = (float)buuff[i] / 4096;
+		vertices[i*7+1] = (float)buuff[i] / 50000;
 	}
 }
 
@@ -285,9 +209,7 @@ void timing(){
 }
 
 void nettoyage(){
-	glDeleteProgram(program); // OpenGL
-//    glDeleteShader(fragmentShader);
-//    glDeleteShader(vertexShader);
+	glDeleteProgram(programGLSL); // OpenGL
     glDeleteBuffers(1, &vbo);
     glDeleteVertexArrays(1, &vao);
 	glfwTerminate();     // GLFW	
@@ -297,11 +219,14 @@ void nettoyage(){
 
 void rendu(){
 
-	uniTime = glGetUniformLocation(program, "time");                  
+	uniTime = glGetUniformLocation(programGLSL, "time");    
+	
+	glEnable(GL_PROGRAM_POINT_SIZE);
 	
 // ----------------------------------------------------------- MAIN LOOP
 	while(!glfwWindowShouldClose(window))
 	{	
+		glPointSize(10.0);
 		// TIMESTAMP : "START"
 		gettimeofday(&start, NULL);			
 		// update du VBO et re-upload des data
@@ -315,10 +240,10 @@ void rendu(){
 		glUniformMatrix4fv(uniProj, 1, GL_FALSE, glm::value_ptr(proj));
 		glUniformMatrix4fv(uniView, 1, GL_FALSE, glm::value_ptr(view));
         //trans = glm::rotate(trans, glm::degrees(0.0001f), glm::vec3(0.0f, 0.0f, 1.0f));
-        glUniformMatrix4fv(modelTrans, 1, GL_FALSE, glm::value_ptr(trans));
+        glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(trans));
         gettimeofday(&draw, NULL);
         // dessine le triangle avec les 3 vertices
-        glDrawElements(GL_LINE_LOOP, 1024, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_POINTS, 1024, GL_UNSIGNED_INT, 0);
         gettimeofday(&swap, NULL);
         glfwSwapBuffers(window);
 		glfwPollEvents();
