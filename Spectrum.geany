@@ -24,19 +24,19 @@ long_line_column=72
 
 [files]
 current_page=0
-FILE_NAME_0=4841;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.instable.cpp;0;4
-FILE_NAME_1=350;GLSL;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FBlankWorld.vert;0;4
-FILE_NAME_2=2631;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FGLShader.cpp;0;4
+FILE_NAME_0=826;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.cpp;0;4
+FILE_NAME_1=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.GLShader.hpp;0;4
+FILE_NAME_2=130;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.GLShader.cpp;0;4
 
 [VTE]
 last_dir=/home/rep
 
 [build-menu]
 C++FT_00_LB=_Compiler
-C++FT_00_CM=g++ -Wall -D__UNIX_JACK__ -c  "%f" $(pkg-config –cflags –libs jack) -lpthread -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
+C++FT_00_CM=g++ -Wall -D__UNIX_JACK__ -c  "%f" $(pkg-config –cflags –libs jack) -lpthread -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm -lftgl -I/usr/include/freetype2/
 C++FT_00_WD=
 C++FT_01_LB=_Construire
-C++FT_01_CM=g++ -Wall -D__UNIX_JACK__ -o  "%e" "%f" GLShader.cpp $(pkg-config –cflags –libs jack) -lpthread -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm
+C++FT_01_CM=g++ -Wall -D__UNIX_JACK__ -o  "%e" "%f" Spectrum.GLShader.cpp $(pkg-config –cflags –libs jack) -lpthread -std=c++11 -lglfw -lGLEW -lGL -lSOIL -lrtmidi -lrtaudio -lpthread -lasound -lm -lftgl -I/usr/include/freetype2/
 C++FT_01_WD=
 filetypes=C++;
 EX_00_LB=_Exécuter
