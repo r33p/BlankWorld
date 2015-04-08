@@ -47,7 +47,7 @@ float vertices[samples*7];
 // GLOBALES RTAUDIO
 int channels = 2;
 int sampleRate = 44100;
-int bufferSize = 512;  // 256 sample frames
+//int bufferSize = 1024;  // 256 sample frames
 int nBuffers = 4;      // number of internal buffers used by device
 int device = 0;        // 0 indicates default or first available device
 double data[2];
@@ -116,9 +116,9 @@ void setup_VBO(){
 	// ------------------------------------------------------------- EBO
 	// ça sert à gérer des index de points (comme dans les fichiers obj)
 	glGenBuffers(1, &ebo);
-	GLuint elements[2048];
+	GLuint elements[1024];
 	// remplissage					
-	for(int i=0;i<2048;i++){elements[i]=i;}
+	for(int i=0;i<1024;i++){elements[i]=i;}
 	// rattachement
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(elements), elements, GL_STATIC_DRAW);
@@ -140,9 +140,11 @@ void setup_GLSL(){
     glEnableVertexAttribArray(colAttrib);
     glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
     // ------------------------------------------------- TEXTURE ATTRIBS
+    /*
     GLint texAttrib = glGetAttribLocation(programGLSL, "texcoord");
     glEnableVertexAttribArray(texAttrib);
     glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7*sizeof(float), (void*)(5*sizeof(float)));
+    */
 }
 
 
@@ -177,7 +179,7 @@ void setup_AUDIO(){
 	RtAudio::StreamParameters parameters;
 	parameters.deviceId = adc.getDefaultInputDevice();
 	unsigned int sampleRate = 44100;
-	unsigned int bufferFrames = 512; // 512 sample frames
+	unsigned int bufferFrames = 512; // 1024 sample frames
 	parameters.nChannels = 2;
 	parameters.firstChannel = 0;
 	try {
@@ -277,8 +279,8 @@ void rendu(){
         
         gettimeofday(&draw, NULL);
         // dessine le triangle avec les 3 vertices
-        glDrawElements(GL_POINTS, 2048, GL_UNSIGNED_INT, 0);
-        //glDrawElements(GL_LINES, 2048, GL_UNSIGNED_INT, 0);
+        glDrawElements(GL_POINTS, 4096, GL_UNSIGNED_INT, 0);
+        //glDrawElements(GL_LINES, 4096, GL_UNSIGNED_INT, 0);
         gettimeofday(&swap, NULL);
         glfwSwapBuffers(window);
 		glfwPollEvents();
