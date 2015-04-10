@@ -1,0 +1,48 @@
+<!DOCTYPE patchbay>
+<patchbay version="0.3.12" name="BlankWorld">
+ <output-sockets>
+  <socket exclusive="off" client="system" type="jack-audio" name="system">
+   <plug>capture_1</plug>
+   <plug>capture_2</plug>
+  </socket>
+  <socket exclusive="off" client="audacious-jack_[0-9]+_000" type="jack-audio" name="audacious-jack_1804_000">
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket exclusive="off" client="audacious-jack_[0-9]+_000" type="jack-audio" name="audacious-jack_1804_000 2">
+   <plug>out_0</plug>
+   <plug>out_0</plug>
+   <plug>out_1</plug>
+   <plug>out_1</plug>
+  </socket>
+  <socket exclusive="off" client="Midi Through" type="alsa-midi" name="Midi Through">
+   <plug>Midi Through Port-0</plug>
+  </socket>
+ </output-sockets>
+ <input-sockets>
+  <socket exclusive="off" client="system" type="jack-audio" name="system">
+   <plug>playback_1</plug>
+   <plug>playback_2</plug>
+   <plug>playback_3</plug>
+   <plug>playback_4</plug>
+  </socket>
+  <socket exclusive="off" client="RtApiJack" type="jack-audio" name="RtApiJack">
+   <plug>inport 0</plug>
+   <plug>inport 1</plug>
+  </socket>
+  <socket exclusive="off" client="system" type="jack-audio" name="system 2">
+   <plug>playback_1</plug>
+   <plug>playback_3</plug>
+   <plug>playback_2</plug>
+   <plug>playback_4</plug>
+  </socket>
+  <socket exclusive="off" client="Midi Through" type="alsa-midi" name="Midi Through">
+   <plug>Midi Through Port-0</plug>
+  </socket>
+ </input-sockets>
+ <slots/>
+ <cables>
+  <cable output="audacious-jack_1804_000 2" input="RtApiJack" type="jack-audio"/>
+ </cables>
+</patchbay>
+
