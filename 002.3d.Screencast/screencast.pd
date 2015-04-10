@@ -1,8 +1,8 @@
-#N canvas 696 145 832 738 10;
+#N canvas 676 144 832 738 10;
 #X obj 233 442 pix_video;
 #X obj 233 41 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X floatatom 370 591 5 0 0 0 - - -, f 5;
+#X floatatom 363 598 5 0 0 0 - - -;
 #X obj 233 587 separator;
 #X obj 233 542 pix_texture;
 #X obj 247 496 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
@@ -23,17 +23,72 @@
 #X obj 254 239 gemhead;
 #X obj 252 132 loadbang;
 #X msg 252 158 perspec -1 1 -1 1 1 400;
-#X obj 544 95 gemwin a;
-#X msg 575 46 create \, 1;
-#X msg 623 70 destroy;
-#X msg 389 433 clearProps \, setProps screen-fps 20 \, setProps screen-caching
+#X msg 533 417 clearProps \, setProps screen-fps 20 \, setProps screen-caching
 200 \, setProps screen-follow-mouse \, setProps screen-left 0 \, setProps
 screen-top 0 \, setProps screen-width 256 \, setProps screen-height
 256 \, device screen://;
-#X msg 263 366 clearProps \, setProps screen-fps 30 \, setProps screen-caching
+#X msg 542 351 clearProps \, setProps screen-fps 30 \, setProps screen-caching
 50 \, setProps screen-follow-mouse \, setProps screen-left 0 \, setProps
 screen-top 0 \, setProps screen-width 128 \, setProps screen-height
 128 \, device screen://;
+#X msg 540 485 clearProps \, setProps screen-fps 30 \, setProps screen-caching
+50 \, setProps screen-follow-mouse \, setProps screen-left 0 \, setProps
+screen-top 0 \, setProps screen-width 32 \, setProps screen-height
+32 \, device screen://;
+#X msg 611 17 dimen 64 64;
+#X msg 687 -11 dimen 256 128;
+#X msg 650 154 enumerate;
+#X msg 656 176 dialog;
+#X msg 619 46 colorspace RGBA;
+#X msg 624 104 device 0;
+#X msg 657 205 driver dv;
+#X obj 601 269 t a a;
+#N canvas 166 121 570 420 device 0;
+#X obj 204 60 cnv 20 20 20 empty \$0-open-canvas 0 4 10 0 16 -233017
+-1 0;
+#X obj 60 61 hradio 18 1 0 8 empty empty empty 0 -6 0 8 -225271 -1
+-1 0;
+#X obj 60 13 inlet;
+#X msg 160 254 label \$1;
+#X obj 160 232 makefilename %d;
+#X obj 60 108 int;
+#X obj 60 337 outlet;
+#X obj 160 277 send \$0-open-canvas;
+#X msg 130 170 device \$1;
+#X obj 60 130 t b f;
+#X obj 130 192 t a a;
+#X obj 130 298 list prepend set;
+#X obj 130 320 list trim;
+#X obj 160 211 route device;
+#X obj 130 116 loadbang;
+#X msg 130 138 0;
+#X connect 1 0 5 0;
+#X connect 2 0 1 0;
+#X connect 3 0 7 0;
+#X connect 4 0 3 0;
+#X connect 5 0 9 0;
+#X connect 8 0 10 0;
+#X connect 9 0 6 0;
+#X connect 9 1 8 0;
+#X connect 10 0 11 0;
+#X connect 10 1 13 0;
+#X connect 11 0 12 0;
+#X connect 12 0 6 0;
+#X connect 13 0 4 0;
+#X connect 14 0 15 0;
+#X connect 15 0 8 0;
+#X coords 0 -1 1 1 165 20 1 60 60;
+#X restore 624 80 pd device;
+#X obj 672 286 print videoctl;
+#X obj 662 239 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 680 238 driver \$1;
+#X text 701 179 (if available);
+#X obj 672 267 r \$0-ctl;
+#X msg 640 128 device /dev/fw1;
+#X msg 458 242 device 1;
+#X obj 458 208 loadbang;
+#X obj 480 413 t a;
 #X connect 0 0 4 0;
 #X connect 1 0 17 0;
 #X connect 2 0 14 3;
@@ -54,7 +109,24 @@ screen-top 0 \, setProps screen-width 128 \, setProps screen-height
 #X connect 18 0 11 0;
 #X connect 19 0 20 0;
 #X connect 20 0 10 0;
-#X connect 22 0 21 0;
-#X connect 23 0 21 0;
-#X connect 24 0 0 0;
-#X connect 25 0 0 0;
+#X connect 21 0 41 0;
+#X connect 22 0 41 0;
+#X connect 23 0 41 0;
+#X connect 24 0 31 0;
+#X connect 25 0 31 0;
+#X connect 26 0 31 0;
+#X connect 27 0 31 0;
+#X connect 28 0 31 0;
+#X connect 29 0 31 0;
+#X connect 30 0 31 0;
+#X connect 31 0 0 0;
+#X connect 31 1 33 0;
+#X connect 32 0 29 0;
+#X connect 34 0 35 0;
+#X connect 35 0 31 0;
+#X connect 37 0 31 0;
+#X connect 38 0 31 0;
+#X connect 39 0 0 0;
+#X connect 40 0 39 0;
+#X connect 41 0 0 0;
+#X coords 0 738 1 737 256 18 0;

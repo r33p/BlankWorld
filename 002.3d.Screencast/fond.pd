@@ -1,0 +1,35 @@
+#N canvas 494 273 732 612 10;
+#X obj 340 537 pix_texture;
+#X obj 414 507 r SCREEN;
+#X floatatom 465 240 5 0 0 0 - - -, f 5;
+#X msg 366 479 quality \$1;
+#X obj 366 458 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 366 403 loadbang;
+#X msg 366 430 0;
+#X obj 340 355 rotateXYZ;
+#X floatatom 381 324 5 0 0 0 - - -, f 5;
+#X floatatom 409 600 5 0 0 0 - - -, f 5;
+#X obj 169 110 r screencast;
+#X obj 432 138 spigot;
+#X obj 428 86 inlet;
+#X obj 473 95 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X obj 340 630 square 440;
+#X obj 340 260 translateXYZ 0 0 -440;
+#X connect 0 0 14 0;
+#X connect 1 0 0 1;
+#X connect 2 0 15 3;
+#X connect 3 0 0 0;
+#X connect 4 0 3 0;
+#X connect 5 0 6 0;
+#X connect 6 0 4 0;
+#X connect 7 0 0 0;
+#X connect 8 0 7 2;
+#X connect 9 0 14 1;
+#X connect 10 0 11 0;
+#X connect 11 0 15 0;
+#X connect 12 0 13 0;
+#X connect 13 0 11 1;
+#X connect 15 0 7 0;
+#X coords 0 612 1 611 256 17 0;

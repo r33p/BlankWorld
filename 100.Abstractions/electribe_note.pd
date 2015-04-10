@@ -1,92 +1,92 @@
-#N canvas 0 79 1600 821 10;
-#X obj 144 216 sel 1;
-#X obj 144 92 stripnote;
-#X obj 180 247 f;
-#X obj 241 299 print note \$1;
-#X obj 241 264 spigot;
-#X obj 280 220 loadbang;
-#X msg 280 242 0;
-#X obj 391 247 tgl 17 0 empty empty DEBUG -40 9 0 12 -191407 -1 -1
+#N canvas 1 86 1598 813 10;
+#X obj 144 208 sel 1;
+#X obj 144 84 stripnote;
+#X obj 180 239 f;
+#X obj 241 291 print note \$1;
+#X obj 241 256 spigot;
+#X obj 280 212 loadbang;
+#X msg 280 234 0;
+#X obj 391 239 tgl 17 0 empty empty DEBUG -40 9 0 12 -191407 -1 -1
 0 1;
-#X obj 744 578 cnv 15 400 150 empty empty empty 20 12 0 14 -257985
+#X obj 744 570 cnv 15 400 150 empty empty empty 20 12 0 14 -257985
 -66577 0;
-#X obj 845 665 midiout;
-#X floatatom 845 618 5 0 0 0 note_0_Pitch - -;
-#X text 859 587 MIDI CTL OUT;
-#X obj 256 82 inlet;
-#X obj 144 184 == \$1;
-#X obj 549 599 &&;
-#X floatatom 592 475 5 0 0 0 - - -;
-#X obj 533 557 >=;
-#X obj 572 558 <=;
-#X floatatom 515 483 5 0 0 0 - - -;
-#X obj 607 509 + 5;
-#X obj 568 509 - 5;
-#X obj 549 626 sel 1;
-#X obj 569 679 f;
-#X obj 573 424 stripnote;
-#X obj 594 380 notein;
-#X obj 180 512 outlet;
-#X obj 845 549 random 127;
-#X obj 845 506 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 845 657 midiout;
+#X floatatom 845 610 5 0 0 0 note_0_Pitch - -, f 5;
+#X text 859 579 MIDI CTL OUT;
+#X obj 256 74 inlet;
+#X obj 144 176 == \$1;
+#X obj 549 591 &&;
+#X floatatom 592 467 5 0 0 0 - - -, f 5;
+#X obj 533 549 >=;
+#X obj 572 550 <=;
+#X floatatom 515 475 5 0 0 0 - - -, f 5;
+#X obj 607 501 + 5;
+#X obj 568 501 - 5;
+#X obj 549 618 sel 1;
+#X obj 569 671 f;
+#X obj 573 416 stripnote;
+#X obj 594 372 notein;
+#X obj 180 504 outlet;
+#X obj 845 541 random 127;
+#X obj 845 498 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 855 439 noteout;
-#X obj 924 388 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 855 431 noteout;
+#X obj 924 380 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X msg 874 403 127;
-#X msg 836 403 0;
-#X obj 774 243 b;
-#X obj 774 178 tgl 15 0 empty empty empty 17 7 0 10 -257985 -1 -1 0
+#X msg 874 395 127;
+#X msg 836 395 0;
+#X obj 774 235 b;
+#X obj 774 170 tgl 15 0 empty empty empty 17 7 0 10 -257985 -1 -1 0
 1;
-#X obj 774 221 metro 20;
-#X obj 845 527 metro 10;
-#X floatatom 774 361 5 0 0 0 - - -;
-#X obj 774 333 + 50;
-#X floatatom 874 205 5 0 0 0 - - -;
-#X obj 874 136 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 774 213 metro 20;
+#X obj 845 519 metro 10;
+#X floatatom 774 353 5 0 0 0 - - -, f 5;
+#X obj 774 325 + 50;
+#X floatatom 874 197 5 0 0 0 - - -, f 5;
+#X obj 874 128 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X msg 874 153 5 \, 200 2000;
-#X obj 874 52 key;
-#X floatatom 874 74 5 0 0 0 - - -;
-#X obj 874 94 == 110;
-#X obj 874 116 sel 1;
-#X msg 845 641 176 \, 99 \, 2 \, 176 \, 98 \, 8 \, 176 \, 6 \, \$1
+#X msg 874 145 5 \, 200 2000;
+#X obj 874 44 key;
+#X floatatom 874 66 5 0 0 0 - - -, f 5;
+#X obj 874 86 == 110;
+#X obj 874 108 sel 1;
+#X msg 845 633 176 \, 99 \, 2 \, 176 \, 98 \, 8 \, 176 \, 6 \, \$1
 ;
-#X obj 819 335 + 10;
-#X obj 774 273 random 100;
-#X obj 1045 394 pack f f;
-#X msg 1090 311 0;
-#X msg 1131 311 1;
-#X msg 1173 311 2;
-#X msg 1214 311 4;
-#X msg 1256 311 5;
-#X msg 1298 311 6;
-#X msg 1339 311 7;
-#X msg 1381 311 8;
-#X obj 1090 254 route lowboost pan pitch modtype modspeed moddepth
+#X obj 819 327 + 10;
+#X obj 774 265 random 100;
+#X obj 1045 386 pack f f;
+#X msg 1090 303 0;
+#X msg 1131 303 1;
+#X msg 1173 303 2;
+#X msg 1214 303 4;
+#X msg 1256 303 5;
+#X msg 1298 303 6;
+#X msg 1339 303 7;
+#X msg 1381 303 8;
+#X obj 1090 246 route lowboost pan pitch modtype modspeed moddepth
 level decay;
-#X obj 1090 328 t f;
-#X msg 1090 77 lowboost;
-#X msg 1090 94 pan;
-#X msg 1090 111 pitch;
-#X msg 1090 128 modtype;
-#X msg 1090 145 modspeed;
-#X msg 1090 162 moddepth;
-#X msg 1090 179 level;
-#X msg 1090 196 decay;
-#X obj 1090 237 t a;
-#X floatatom 1090 347 5 0 0 0 - - -;
-#X obj 1045 458 midiout;
-#X msg 1045 418 176 \, 99 \, 2 \, 176 \, 98 \, \$2 \, 176 \, 6 \, \$1
+#X obj 1090 320 t f;
+#X msg 1090 69 lowboost;
+#X msg 1090 86 pan;
+#X msg 1090 103 pitch;
+#X msg 1090 120 modtype;
+#X msg 1090 137 modspeed;
+#X msg 1090 154 moddepth;
+#X msg 1090 171 level;
+#X msg 1090 188 decay;
+#X obj 1090 229 t a;
+#X floatatom 1090 339 5 0 0 0 - - -, f 5;
+#X obj 1045 450 midiout;
+#X msg 1045 410 176 \, 99 \, 2 \, 176 \, 98 \, \$2 \, 176 \, 6 \, \$1
 ;
-#X floatatom 1045 48 5 0 0 0 - - -;
-#X obj 1059 363 b;
-#X obj 144 58 notein;
-#X obj 874 174 line_;
-#X obj 223 452 r tutututu;
-#X obj 874 348 t b;
-#X obj 874 260 t b;
-#X obj 665 500 t f;
+#X floatatom 1045 40 5 0 0 0 - - -, f 5;
+#X obj 1059 355 b;
+#X obj 144 50 notein;
+#X obj 874 166 line_;
+#X obj 223 444 r tutututu;
+#X obj 874 340 t b;
+#X obj 874 252 t b;
+#X obj 665 492 t f;
 #X connect 0 0 2 0;
 #X connect 1 0 13 0;
 #X connect 1 1 2 1;
@@ -176,4 +176,4 @@ level decay;
 #X connect 76 0 31 0;
 #X connect 77 0 76 0;
 #X connect 78 0 22 1;
-#X coords 0 821 1 820 192 17 0;
+#X coords 0 813 1 812 192 17 0;

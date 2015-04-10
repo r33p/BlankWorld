@@ -1,109 +1,100 @@
-#N canvas 161 343 1345 660 10;
-#X obj 595 267 b;
-#X obj 595 219 bng 15 250 50 0 empty empty create 17 7 0 10 -191407
+#N canvas 252 107 1345 701 10;
+#X obj 597 306 b;
+#X obj 597 218 bng 15 250 50 0 empty createwindow create 17 7 0 10
+-262144 -1 -4034;
+#X obj 834 578 abstractions/gemwin 20 b;
+#X obj 639 578 abstractions/gemwin 20 a;
+#X msg 681 219 destroy;
+#X obj 774 150 bng 15 250 50 0 empty empty init 17 7 0 10 -262144 -1
+-4034;
+#X obj 681 146 bng 15 250 50 0 empty empty destroy 17 7 0 10 -262144
+-1 -4034;
+#X msg 774 224 border 1 \, perspec -1 1 -1 1 1 400;
+#X obj 834 559 r Wb;
+#X obj 681 302 s Wa;
+#X obj 774 302 s Wb;
+#X obj 597 507 s Wa;
+#X obj 639 559 r Wa;
+#X text 101 293 - taille WINDOW;
+#X text 101 305 - taille FRAMEBUFFER;
+#X text 127 335 - effet FLOU;
+#X text 128 350 - effet PIXEL8BIT;
+#X text 331 570 - objet GEMVERTEXBUFFER;
+#X text 329 587 - objet CUBE;
+#X text 330 554 - objet OBJET3D;
+#X text 329 603 - objet PARTICULES;
+#X text 200 403 - calque OSD;
+#X text 201 431 - calque FOND;
+#X text 201 417 - calque OBJETS;
+#X obj 83 395 bng 16 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 183 411 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 303 560 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 83 300 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 183 544 bng 16 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj 825 459 abstractions/gemwin 20 b;
-#X obj 630 459 abstractions/gemwin 20 a;
-#X msg 679 180 destroy;
-#X obj 772 111 bng 15 250 50 0 empty empty init 17 7 0 10 -191407 -1
+#X text 101 226 - midi output ELECTRIBE;
+#X text 101 240 - midi input ELECTRIBE;
+#X text 101 212 - audio input;
+#X obj 83 205 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 679 107 bng 15 250 50 0 empty empty destroy 17 7 0 10 -191407
+#X text 104 139 - config -rt -sleepgrain 1 -nosleep;
+#X obj 83 145 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 116 341 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 303 500 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 183 484 bng 16 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X msg 772 185 border 1 \, perspec -1 1 -1 1 1 400;
-#X obj 624 325 s Wb;
-#X obj 825 440 r Wb;
-#X obj 679 263 s Wa;
-#X obj 772 263 s Wb;
-#X obj 579 376 s Wa;
-#X obj 630 440 r Wa;
-#X text 99 254 - taille WINDOW;
-#X text 99 266 - taille FRAMEBUFFER;
-#X text 125 296 - effet FLOU;
-#X text 126 311 - effet PIXEL8BIT;
-#X text 329 531 - objet GEMVERTEXBUFFER;
-#X obj 1106 95 cnv 15 200 350 empty empty empty 20 12 0 14 -233017
--66577 0;
-#X obj 1143 320 cnv 15 100 25 empty empty empty 20 12 0 14 -1 -66577
-0;
-#X obj 1225 377 cnv 15 50 50 empty empty empty 20 12 0 14 -1 -66577
-0;
-#X obj 1171 377 cnv 15 50 50 empty empty empty 20 12 0 14 -1 -66577
-0;
-#X obj 1117 377 cnv 15 50 50 empty empty empty 20 12 0 14 -1 -66577
-0;
-#X obj 1116 193 cnv 15 50 50 empty empty empty 20 12 0 14 -1 -66577
-0;
-#X obj 1218 193 cnv 15 50 50 empty empty empty 20 12 0 14 -1 -66577
-0;
-#X obj 1116 243 cnv 15 50 50 empty empty empty 20 12 0 14 -1 -66577
-0;
-#X obj 1218 243 cnv 15 50 50 empty empty empty 20 12 0 14 -1 -66577
-0;
-#X obj 1231 264 cnv 15 25 25 empty empty empty 20 12 0 14 -262144 -66577
-0;
-#X obj 1129 264 cnv 15 25 25 empty empty empty 20 12 0 14 -262144 -66577
-0;
-#X obj 1141 401 cnv 15 25 25 empty empty empty 20 12 0 14 -262144 -66577
-0;
-#X obj 1195 401 cnv 15 25 25 empty empty empty 20 12 0 14 -262144 -66577
-0;
-#X msg 579 354 border 0 \, offset 1600 0 \, dimen 1920 1080 \, title
-a \, create \, 1, f 61;
-#X text 327 548 - objet CUBE;
-#X text 328 515 - objet OBJET3D;
-#X text 327 564 - objet PARTICULES;
-#X text 198 364 - calque OSD;
-#X text 199 392 - calque FOND;
-#X text 199 378 - calque OBJETS;
-#X obj 81 356 bng 16 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X obj 181 372 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X obj 301 521 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X obj 81 261 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X obj 181 505 bng 16 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X text 99 187 - midi output ELECTRIBE;
-#X text 99 201 - midi input ELECTRIBE;
-#X text 99 173 - audio input;
-#X obj 81 166 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X text 102 100 - config -rt -sleepgrain 1 -nosleep;
-#X obj 81 106 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X obj 114 302 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X obj 301 461 bng 8 250 50 0 empty empty empty 17 7 0 10 -262144 -1
--1;
-#X obj 181 445 bng 16 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X text 102 114 - config CANVA BACKGROUND + COLORS;
-#X text 100 159 - OSC input;
-#X text 320 453 - texture VLCSCREENCAPTURE;
-#X text 326 582 - objet GENERATIVE3D;
-#X msg 624 303 title b \, dimen 256 256 \, border 0 \, offset 10 30
-\, create \, 1;
-#X connect 0 0 32 0;
-#X connect 0 0 57 0;
+#X text 104 153 - config CANVA BACKGROUND + COLORS;
+#X text 102 198 - OSC input;
+#X text 322 492 - texture VLCSCREENCAPTURE;
+#X text 328 621 - objet GENERATIVE3D;
+#X obj 658 27 inlet;
+#X obj 623 375 s Wb;
+#X msg 639 606 title a \, frame 50 \, border 0 \, offset 1600 0 \,
+dimen 1920 1080 \, create \, 1;
+#X msg 626 340 title b \, frame 30 \, dimen 256 256 \, border 0 \,
+offset 10 30 \, create \, 1;
+#X msg 829 81 color 0 0 0 \, title a \, frame 60 \, border 0 \, offset
+1600 0 \, dimen 1366 768 \, create \, 1;
+#X obj 658 56 sel 1 0;
+#X obj 597 104 t b b;
+#X msg 523 403 FSAA 14 \, color 0 0 0 \, title a \, frame 60 \, border
+0 \, offset 1600 0 \, dimen 1360 768 \, create \, 1;
+#X msg 423 275 color \$1 \$1 \$1;
+#X obj 457 228 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X msg 597 455 FSAA 5 \, color 0 0 0 \, title a \, frame 60 \, border
+0 \, offset 1600 0 \, dimen 1440 900 \, create \, 1;
+#X connect 0 0 52 0;
 #X connect 1 0 0 0;
-#X connect 4 0 10 0;
-#X connect 4 0 11 0;
+#X connect 4 0 9 0;
 #X connect 5 0 7 0;
 #X connect 6 0 4 0;
-#X connect 7 0 11 0;
-#X connect 7 0 10 0;
-#X connect 9 0 2 0;
-#X connect 13 0 3 0;
-#X connect 32 0 12 0;
-#X connect 39 0 40 0;
-#X connect 40 0 52 0;
-#X connect 42 0 39 0;
-#X connect 42 0 50 0;
-#X connect 43 0 41 0;
-#X connect 47 0 42 0;
-#X connect 49 0 47 0;
-#X connect 52 0 51 0;
-#X connect 52 0 43 0;
-#X connect 57 0 8 0;
+#X connect 7 0 9 0;
+#X connect 8 0 2 0;
+#X connect 12 0 3 0;
+#X connect 24 0 25 0;
+#X connect 25 0 37 0;
+#X connect 27 0 24 0;
+#X connect 27 0 35 0;
+#X connect 28 0 26 0;
+#X connect 32 0 27 0;
+#X connect 34 0 32 0;
+#X connect 37 0 36 0;
+#X connect 37 0 28 0;
+#X connect 42 0 47 0;
+#X connect 45 0 43 0;
+#X connect 47 0 48 0;
+#X connect 47 1 6 0;
+#X connect 48 0 1 0;
+#X connect 48 1 5 0;
+#X connect 49 0 11 0;
+#X connect 50 0 11 0;
+#X connect 51 0 50 0;
+#X connect 52 0 11 0;

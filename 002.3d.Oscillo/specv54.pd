@@ -1,0 +1,25 @@
+#N canvas 33 145 891 556 10;
+#X obj 504 336 table spectrum 128;
+#X obj 331 154 *~;
+#X obj 358 154 *~;
+#X obj 330 194 +~;
+#X obj 331 225 sqrt~;
+#X obj 318 75 adc~;
+#X obj 325 331 tabwrite~ spectrum;
+#X obj 367 276 metro 30;
+#X obj 391 227 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 643 185;
+#X obj 331 127 rfft~;
+#X connect 1 0 3 0;
+#X connect 2 0 3 1;
+#X connect 3 0 4 0;
+#X connect 4 0 6 0;
+#X connect 5 0 10 0;
+#X connect 5 1 10 0;
+#X connect 7 0 6 0;
+#X connect 8 0 7 0;
+#X connect 10 0 1 0;
+#X connect 10 0 1 1;
+#X connect 10 1 2 0;
+#X connect 10 1 2 1;

@@ -1,0 +1,16 @@
+#N canvas 460 436 450 300 10;
+#X obj 190 -79 adc~;
+#X obj 254 -65 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 184 -47 *~ 3;
+#X msg 272 -16 start 2;
+#X obj 216 56 tabwrite~ POSYY;
+#X obj 249 -85 loadbang;
+#X obj 243 -42 metro 50;
+#X connect 0 0 2 0;
+#X connect 0 1 2 0;
+#X connect 1 0 6 0;
+#X connect 2 0 4 0;
+#X connect 5 0 1 0;
+#X connect 6 0 3 0;
+#X connect 6 0 4 0;

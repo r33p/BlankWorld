@@ -1,4 +1,4 @@
-#N canvas 833 285 586 614 10;
+#N canvas 829 285 586 614 10;
 #X obj 99 35 r rayurejaune;
 #X obj 99 218 rotateXYZ 0 0 67;
 #X obj 99 166 translateXYZ 0 0 -4;
@@ -11,7 +11,7 @@
 #X obj 99 464 translateXYZ 0 -2 0;
 #X obj 426 324 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X floatatom 266 105 5 0 0 0 - - -, f 5;
+#X floatatom 266 105 5 0 0 0 - - -;
 #X obj 99 280 translateXYZ 0 4 0;
 #X obj 99 375 translateXYZ 0 -2 0;
 #X obj 99 600 rectangle 100 1;
@@ -22,7 +22,7 @@
 1;
 #X obj 321 258 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X floatatom 450 96 5 0 0 0 - - -, f 5;
+#X floatatom 450 96 5 0 0 0 - - -;
 #X msg 357 475 0.5;
 #X obj 357 494 t a;
 #X msg 310 349 0;
@@ -38,6 +38,9 @@
 -1 -1;
 #X obj 99 66 alpha;
 #X obj 298 297 pipe 200;
+#X obj 190 12 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X obj 190 -12 ../100.Input/lpd8/lpd8_pad 41;
 #X connect 0 0 33 0;
 #X connect 1 0 12 0;
 #X connect 2 0 4 0;
@@ -77,3 +80,5 @@
 #X connect 32 0 31 0;
 #X connect 33 0 5 0;
 #X connect 34 0 23 0;
+#X connect 35 0 31 0;
+#X connect 36 0 35 0;

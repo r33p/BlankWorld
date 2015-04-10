@@ -1,0 +1,86 @@
+#N canvas 153 145 1446 729 10;
+#X obj 289 522 glsl_program;
+#X obj 364 361 pack 0 0;
+#X obj 385 339 t b f;
+#X obj 385 301 change;
+#X msg 364 387 link \$1 \$2;
+#X floatatom 385 321 2 0 0 0 ID - -, f 2;
+#X floatatom 364 218 2 0 0 0 ID - -, f 2;
+#X obj 376 417 print linking;
+#X obj 290 172 glsl_vertex;
+#X obj 290 276 glsl_fragment;
+#X obj 364 195 change;
+#X msg 354 469 vx_offset \$1;
+#X floatatom 354 452 5 0 0 0 - - -, f 5;
+#X obj 354 489 t a;
+#X msg 212 505 print;
+#X text 569 273 uniform sampler2D tex0 \; uniform float time \; uniform
+float rt_w \; uniform float rt_h \; uniform float stitching_size =
+6 \; uniform int invert = 0 \;;
+#X msg 677 488 stitching_size \$1;
+#X floatatom 677 467 5 0 0 0 - - -, f 5;
+#X msg 571 488 invert \$1;
+#X obj 571 470 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+1;
+#X obj 513 410 loadbang;
+#X obj 513 505 t a;
+#X text 946 21 #version 120 uniform sampler2D tex0 \; uniform float
+time \; uniform float rt_w \; uniform float rt_h \; uniform float stitching_size
+= 6 \; uniform int invert = 0 \; vec4 PostFX(sampler2D tex \, vec2
+uv \, float time) vec4 c = vec4(0.0) \; float size = stitching_size
+\; vec2 cPos = uv * vec2(rt_w \, rt_h) \; vec2 tlPos = floor(cPos /
+vec2(size \, size)) \; tlPos *= size \; int remX = int(mod(cPos.x \,
+size)) \; int remY = int(mod(cPos.y \, size)) \; if (remX == 0 && remY
+== 0) tlPos = cPos \; vec2 blPos = tlPos \; blPos.y += (size - 1.0)
+\; if ((remX == remY) || (((int(cPos.x) - int(blPos.x)) == (int(blPos.y)
+- int(cPos.y))))) if (invert == 1) c = vec4(0.2 \, 0.15 \, 0.05 \,
+1.0) \; else c = texture2D(tex \, tlPos * vec2(1.0/rt_w \, 1.0/rt_h))
+* 1.4 \; else if (invert == 1) c = texture2D(tex \, tlPos * vec2(1.0/rt_w
+\, 1.0/rt_h)) * 1.4 \; else c = vec4(0.0 \, 0 \, 0 \, 1.0) \; return
+c \; void main (void) vec2 uv = gl_TexCoord[0].st \; gl_FragColor =
+PostFX(tex0 \, uv \, time) \; /* * partage l'ecran en 2 * if (uv.y
+> 0.5) gl_FragColor = PostFX(tex0 \, uv \, time) \; else uv.y += 0.5
+\; vec4 c1 = texture2D(tex0 \, uv) \; gl_FragColor = c1 \; * */;
+#X text 946 534 void main() gl_Position = ftransform() \; gl_TexCoord[0]
+= gl_MultiTexCoord0 \;;
+#X msg 308 145 open glsl/CrossStitching.vert;
+#X msg 325 245 open glsl/CrossStitching.frag;
+#X obj 290 88 inlet;
+#X obj 289 599 outlet;
+#X msg 513 432 invert 1 \, rt_w 640 \, rt_h 480 \, stitching_size 6
+;
+#X msg 722 539 rt_h \$1;
+#X floatatom 843 353 5 0 0 0 - - -, f 5;
+#X msg 611 593 rt_w \$1;
+#X connect 0 0 27 0;
+#X connect 1 0 4 0;
+#X connect 2 0 1 0;
+#X connect 2 1 1 1;
+#X connect 3 0 5 0;
+#X connect 4 0 0 0;
+#X connect 4 0 7 0;
+#X connect 5 0 2 0;
+#X connect 6 0 1 0;
+#X connect 8 0 9 0;
+#X connect 8 1 10 0;
+#X connect 9 0 0 0;
+#X connect 9 1 3 0;
+#X connect 10 0 6 0;
+#X connect 11 0 13 0;
+#X connect 12 0 11 0;
+#X connect 13 0 0 0;
+#X connect 14 0 0 0;
+#X connect 16 0 21 0;
+#X connect 17 0 16 0;
+#X connect 18 0 21 0;
+#X connect 19 0 18 0;
+#X connect 20 0 28 0;
+#X connect 21 0 0 0;
+#X connect 24 0 8 0;
+#X connect 25 0 9 0;
+#X connect 26 0 8 0;
+#X connect 28 0 21 0;
+#X connect 29 0 21 0;
+#X connect 30 0 29 0;
+#X connect 30 0 31 0;
+#X connect 31 0 21 0;

@@ -1,27 +1,27 @@
-#N canvas 358 138 1071 761 10;
+#N canvas 524 136 1071 761 10;
 #X obj 661 741 t a;
 #X obj 661 724 t a;
 #X obj 686 707 loadbang;
 #X obj 648 709 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X msg 617 758 6 0 0;
-#X obj 124 65 spigot;
-#X obj 124 180 gemlist;
-#X obj 124 152 until;
-#X obj 124 108 t b a;
-#X obj 125 -188 separator;
+#X obj 92 43 spigot;
+#X obj 92 158 gemlist;
+#X obj 92 130 until;
+#X obj 92 86 t b a;
+#X obj 93 -210 separator;
 #X obj 470 470 b;
 #X obj 168 429 pack f f;
 #X obj 237 291 random 360;
 #X obj 168 454 route 0 1 2;
 #X obj 355 -269 inlet;
-#X obj 125 -209 r fildefer;
+#X obj 93 -231 r fildefer;
 #X obj 173 384 b;
 #X obj 168 406 f;
-#X floatatom 254 -191 5 0 0 0 - - -, f 5;
+#X floatatom 222 -213 5 0 0 0 - - -, f 5;
 #X obj 517 45 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
-#X obj 124 -168 translateXYZ 0 0 -4;
+#X obj 92 -190 translateXYZ 0 0 -4;
 #X obj 124 495 rotateXYZ 0 0 0;
 #X floatatom 470 -233 5 0 0 0 - - -, f 5;
 #X obj 59 737 loadbang;
@@ -30,7 +30,7 @@
 #X msg 573 758 1 2 0;
 #X obj 248 569 t a;
 #X obj 408 575 t a;
-#X obj 124 8 scaleXYZ;
+#X obj 92 -14 scaleXYZ;
 #N canvas 1 93 939 682 defaults 0;
 #X obj 425 140 t a;
 #X obj 425 113 t a;
@@ -63,11 +63,11 @@
 #X obj 508 567 t a;
 #X obj 508 608 * -1;
 #X obj 470 -264 inlet;
-#X obj 191 -101 t a;
-#X msg 192 -48 0;
-#X obj 124 209 colorRGB 1 1 1 1;
-#X msg 158 -74 0.5;
-#X obj 162 -23 t a;
+#X obj 159 -123 t a;
+#X msg 160 -70 0;
+#X obj 92 187 colorRGB 1 1 1 1;
+#X msg 126 -96 0.5;
+#X obj 130 -45 t a;
 #X obj 470 73 t a;
 #X obj 261 230 b;
 #X obj 275 775 polygon 4;
@@ -82,17 +82,17 @@
 #X msg 305 877 0 3 0;
 #X msg 59 758 draw line \, width 2 \, res 4;
 #X msg 59 904 draw line \, width 2 \, res 3;
-#X obj -351 659 text3d;
-#X msg -332 613 text 33 \, font /usr/share/fonts/truetype/f500/f500.ttf
+#X obj -305 469 text3d;
+#X msg -282 418 text 33 \, font /usr/share/fonts/truetype/f500/f500.ttf
 ;
-#X obj -290 579 loadbang;
-#X obj 83 247 t a a;
-#X obj -74 294 separator;
-#X floatatom 5 311 5 0 0 0 - - -, f 5;
-#X msg -312 638 30;
+#X obj -244 389 loadbang;
+#X obj 92 247 t a a;
+#X obj -305 264 separator;
+#X floatatom -223 291 5 0 0 0 - - -, f 5;
+#X msg -266 448 30;
 #X obj 590 41 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj -77 338 translateXYZ 0 5 0;
+#X obj -305 318 translateXYZ 0 5 0;
 #N canvas 1 93 635 596 backup 0;
 #X obj 223 407 t a;
 #X obj 223 380 t a;
@@ -228,7 +228,7 @@
 #X obj 248 592 random 20;
 #X obj 508 587 random 20;
 #X msg 248 615 \$1 1800;
-#X obj 205 -73 pipe 200;
+#X obj 173 -95 pipe 200;
 #X obj 470 -207 electribe_note 3;
 #X obj 221 367 line_;
 #X obj 248 636 line_;
@@ -239,7 +239,10 @@
 #X msg 332 618 \$1 300;
 #X msg 409 617 \$1 600;
 #X msg 508 630 \$1 300;
-#X msg 124 130 11;
+#X msg 92 108 11;
+#X obj 624 -129 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj 624 -150 ../100.Input/lpd8/lpd8_pad 42;
 #X connect 0 0 25 0;
 #X connect 0 0 26 0;
 #X connect 0 0 4 0;
@@ -337,3 +340,6 @@
 #X connect 78 0 74 0;
 #X connect 79 0 75 0;
 #X connect 80 0 7 0;
+#X connect 81 0 34 0;
+#X connect 81 0 19 0;
+#X connect 82 0 81 0;
