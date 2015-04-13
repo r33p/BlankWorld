@@ -1,4 +1,0 @@
-#N canvas 569 145 728 477 10;
-#X obj 279 273 outlet;
-#X obj 279 190 ctlin \$1 1;
-#X connect 1 0 0 0;
