@@ -100,8 +100,8 @@ void setup_MATRICES(){
 
 void updateVBO(){
 	for (int i=0;i<points;i++){
-		vertices[i*7+1] = ((rand() % 100)+ 1) / 100;
-		printf("vertices[1] = %f\n",(float)vertices[1]);
+		vertices[i*7+1] = (float)((rand() % 1000)+ 1)/1000.0;
+		printf("vertices[%i] = %f\n", i, (float)vertices[i*7+1]);
 	}
 }
 

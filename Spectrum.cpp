@@ -136,9 +136,11 @@ void setup_GLSL(){
 	// comment sont formatées nos données de vertex :
 	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7* sizeof(GLfloat), 0);
 	// ------------------------------------------------ FRAGMENT ATTRIBS	
-	GLint colAttrib = glGetAttribLocation(programGLSL, "color");
+	/*
+	 * GLint colAttrib = glGetAttribLocation(programGLSL, "color");
     glEnableVertexAttribArray(colAttrib);
     glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
+    */
     // ------------------------------------------------- TEXTURE ATTRIBS
     /*
     GLint texAttrib = glGetAttribLocation(programGLSL, "texcoord");

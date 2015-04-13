@@ -33,7 +33,7 @@ int main(void){
     if (!glfwInit())
         return -1;
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    window = glfwCreateWindow(640, 480, "YUYUYU", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -56,12 +56,14 @@ int main(void){
     
     // ----------------------------------------------------- RENDER LOOP
     /* Loop until the user closes the window */
-    while (!glfwWindowShouldClose(window))
+    //while (!glfwWindowShouldClose(window))
+    for(int i=0; i<10; i++)
     {
 		
         // ------------------------------------------------- DRAW OPENGL
-        updateVBO();
-        glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        updateVBO(); // point.cpp
+        //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+        glDrawElements(GL_POINTS, 4096, GL_UNSIGNED_INT, 0);
         printf("RENDER\n");
         
         
