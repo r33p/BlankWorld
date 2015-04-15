@@ -7,7 +7,7 @@ out vec2 Texcoord;
 
 out float tintin;
 
-uniform mat4 moel;
+uniform mat4 model;
 uniform mat4 view;
 uniform mat4 proj;
 uniform float mydata[1024];

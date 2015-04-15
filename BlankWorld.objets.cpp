@@ -1,6 +1,7 @@
 // BlankWorld.cpp point.cpp point.hpp Spectrum.GLShader.hpp
 
 #include <fstream> // printf
+#include <unistd.h> // usleep
 
 // GLEW STATIC LINK
 #define GLEW_STATIC
@@ -56,18 +57,23 @@ int main(void){
     
     // ----------------------------------------------------- RENDER LOOP
     /* Loop until the user closes the window */
-    //while (!glfwWindowShouldClose(window))
-    for(int i=0; i<10; i++)
-    {
+    while (!glfwWindowShouldClose(window))
+    //for(int i=0; i<1; i++)
+    {		
 		
-        // ------------------------------------------------- DRAW OPENGL
+		// --------------------------------------------------------- FPS
+		usleep(500000);
+		
+		
+		glClearColor(0.5f, 0.5f, 0.5f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT); 
+        
+        // ------------------------------------------------------ OPENGL
         updateVBO(); // point.cpp
-        //glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-        glDrawElements(GL_POINTS, 4096, GL_UNSIGNED_INT, 0);
-        printf("RENDER\n");
         
+        printf("SWAP BUFFER \n");
         
-        // -------------------------------------------- GLFW SWAP BUFFER
+        // ------------------------------------------------- SWAP BUFFER
         /* Swap front and back buffers */
         glfwSwapBuffers(window);
         /* Poll for and process events */

@@ -255,12 +255,7 @@ void setupScene(){
     glm::vec3(0.0f, 1.0f, 0.0f));
 // ------------------------------------------------------------ PROJ
 	proj = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 1.0f, 10.0f);
-	
-	
-	
 	}
-
-
 
 
 void setupGlobal(){
