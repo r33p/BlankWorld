@@ -8,9 +8,8 @@ struct point
 	void affiche();
 };
 
-
 void setup_VBO();
 void setup_GLSL();
 void setup_TEXTURES();
 void setup_MATRICES();
-void updateVBO();
+void spectrum_updateVBO();

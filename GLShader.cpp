@@ -1,11 +1,10 @@
-#include "Spectrum.GLShader.hpp"
-
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <algorithm>
 
+#include "GLShader.hpp"
 
 std::string readFile(const char *filePath) {
     std::string content;
@@ -44,39 +43,39 @@ GLuint LoadShader(const char *vertex_path, const char *geometry_path, const char
     int logLength;
 
     // VERTEX  ---------------------------------------------------------
-    std::cout << "COMPILE VERT." << std::endl;
+    std::cout << " COMPILE VERT." << std::endl;
     glShaderSource(vertShader, 1, &vertShaderSrc, NULL);
     glCompileShader(vertShader);
     // CHECK ERREUR
     GLint statusVERT, lenVERT;
     glGetShaderiv(vertShader, GL_COMPILE_STATUS, &statusVERT);
-    std::cout << "STATUS VERT : "<< statusVERT << std::endl; // retour d'erreurs des shaders
+    std::cout << " STATUS VERT : "<< statusVERT << std::endl; // retour d'erreurs des shaders
         glGetShaderiv(vertShader, GL_SHADER_SOURCE_LENGTH, &lenVERT);
-    std::cout << "LENGHT VERT : "<< lenVERT << std::endl;
+    std::cout << " LENGHT VERT : "<< lenVERT << std::endl;
     
     // GEOMETRY  -------------------------------------------------------
-    std::cout << "COMPILE GEOM." << std::endl;
+    std::cout << " COMPILE GEOM." << std::endl;
     glShaderSource(geomShader, 1, &geomShaderSrc, NULL);
     glCompileShader(geomShader);
     // CHECK ERREUR
     GLint statusGEOM, lenGEOM;
     glGetShaderiv(geomShader, GL_COMPILE_STATUS, &statusGEOM);
-    std::cout << "STATUS GEOM : "<< statusGEOM << std::endl; // retour d'erreurs des shaders
+    std::cout << " STATUS GEOM : "<< statusGEOM << std::endl; // retour d'erreurs des shaders
         glGetShaderiv(geomShader, GL_SHADER_SOURCE_LENGTH, &lenGEOM);
-    std::cout << "LENGHT GEOM : "<< lenGEOM << std::endl;
+    std::cout << " LENGHT GEOM : "<< lenGEOM << std::endl;
     
     // FRAGMENT  -------------------------------------------------------
-    std::cout << "COMPILE FRAG" << std::endl;
+    std::cout << " COMPILE FRAG" << std::endl;
     glShaderSource(fragShader, 1, &fragShaderSrc, NULL);
     glCompileShader(fragShader);
     // CHECK ERREUR    
 	GLint statusFRAG, lenFRAG;
     glGetShaderiv(fragShader, GL_COMPILE_STATUS, &statusFRAG);
-    std::cout << "STATUS FRAG : "<< statusFRAG << std::endl;
+    std::cout << " STATUS FRAG : "<< statusFRAG << std::endl;
     glGetShaderiv(fragShader, GL_SHADER_SOURCE_LENGTH, &lenFRAG);
-    std::cout << "LENGHT FRAG : "<< lenFRAG << std::endl;
+    std::cout << " LENGHT FRAG : "<< lenFRAG << std::endl;
         
-    std::cout << "LINKING PROGRAM" << std::endl;
+    std::cout << " LINKING PROGRAM" << std::endl;
     GLuint program = glCreateProgram();
     glAttachShader(program, vertShader);
     glAttachShader(program, geomShader);
@@ -86,15 +85,14 @@ GLuint LoadShader(const char *vertex_path, const char *geometry_path, const char
     
 
     glGetProgramiv(program, GL_LINK_STATUS, &result);
-    std::cout << "PROGRAM LINK STATUS : " << result << std::endl;
+    std::cout << " PROGRAM LINK STATUS : " << result << std::endl;
 
     glGetProgramiv(program, GL_INFO_LOG_LENGTH, &logLength);
-	std::cout << "LOG LENGTH : " << logLength << std::endl;
+	std::cout << " LOG LENGTH : " << logLength << std::endl;
 
     std::vector<char> programError( (logLength > 1) ? logLength : 1 );
     glGetProgramInfoLog(program, logLength, NULL, &programError[0]);
-    std::cout << "ERREUR PROGRAM : " << &programError[0] << std::endl;
-    
+    std::cout << " ERREUR PROGRAM : " << &programError[0] << std::endl;
 
     glDeleteShader(vertShader);
     glDeleteShader(fragShader);

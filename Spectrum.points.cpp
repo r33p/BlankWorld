@@ -13,12 +13,12 @@
 #include <iostream>
 #include <cstdlib> // rand()
 
-#include "Spectrum.GLShader.hpp"
-#include "point.hpp"
+#include "GLShader.hpp"
+#include "Spectrum.points.hpp"
 
 // VARIABLES GLOBALES
 GLuint		vbo, ebo, vao;								// VBO
-const int 	points=8;									//
+const int 	points=16;									//
 float		vertices[points*7];							//
 GLuint		textures[2];								// TEXTURES
 GLuint		vertexShader, fragmentShader, programGLSL;	// SHADERS
@@ -42,7 +42,7 @@ void setup_VBO(){
  	
  	for (int i=0;i<points;i++){
 		float truc = (float)i;
-		vertices[i*7] = truc / 10.0;
+		vertices[i*7] = truc / 40.0;
 	}
 
 	glBindBuffer(GL_ARRAY_BUFFER, vbo); // rendre le buffer actif
@@ -65,7 +65,7 @@ void setup_VBO(){
 
 void setup_GLSL(){
 	programGLSL = LoadShader("Spectrum.vert", "Spectrum.geom", "Spectrum.frag");
-	printf("PROGRAM GLSL USE: %i \n",programGLSL);
+	printf(" PROGRAM GLSL USE: %i \n",programGLSL);
 	glUseProgram(programGLSL);
 
 	// -------------------------------------------------- VERTEX ATTRIBS	
@@ -105,7 +105,7 @@ float randoom(){
 	return hasard;
 }
 
-void updateVBO(){
+void spectrum_updateVBO(){
 	for (int i=0;i<points;i++){
 		vertices[i*7+1] = randoom();
 	}
@@ -130,6 +130,6 @@ void point::update(int addabs, int addord){
 }
 		
 void point::affiche(){
-	printf("X:%d, Y:%d \n", x,y);
+	printf(" X:%d, Y:%d \n", x,y);
 }
 

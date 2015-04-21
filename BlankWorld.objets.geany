@@ -23,12 +23,16 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=1
-FILE_NAME_0=410;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FBlankWorld.objets.cpp;0;4
-FILE_NAME_1=3802;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2Fpoint.cpp;0;4
-FILE_NAME_2=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2Fpoint.hpp;0;4
-FILE_NAME_3=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.GLShader.cpp;0;4
-FILE_NAME_4=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.GLShader.hpp;0;4
+current_page=0
+FILE_NAME_0=1236;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FBlankWorld.objets.cpp;0;4
+FILE_NAME_1=848;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.points.cpp;0;4
+FILE_NAME_2=215;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FSpectrum.points.hpp;0;4
+FILE_NAME_3=3612;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FGLShader.cpp;0;4
+FILE_NAME_4=0;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FGLShader.hpp;0;4
+FILE_NAME_5=414;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FCube.class.cpp;0;4
+FILE_NAME_6=502;C++;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FCube.class.hpp;0;4
+FILE_NAME_7=350;None;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FCube.geom;0;4
+FILE_NAME_8=123;GLSL;0;EUTF-8;1;1;0;%2Fhome%2Frep%2FProjets%2FBlankWorld%2FBlankWorld%2FCube.vert;0;4
 
 [VTE]
 last_dir=/home/rep
@@ -38,6 +42,6 @@ C++FT_00_LB=_Compiler
 C++FT_00_CM=g++ -Wall -c "%f" -lrtaudio -std=c++11
 C++FT_00_WD=
 C++FT_01_LB=_Construire
-C++FT_01_CM=g++ -Wall -o "%e" "%f" point.cpp Spectrum.GLShader.cpp -lrtaudio -lglfw -lGLEW -lGL -std=c++11
+C++FT_01_CM=g++ -Wall -o "%e" "%f" GLShader.cpp Cube.class.cpp -lrtaudio -lglfw -lGLEW -lGL -std=c++11
 C++FT_01_WD=
 filetypes=C++;
