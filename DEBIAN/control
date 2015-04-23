@@ -1,0 +1,9 @@
+Package: blankworld
+Version: 0.1
+Section: base
+Priority: optional
+Architecture: all
+Depends: librtaudio5, libglfw3, libglew1.10, libgl1-mesa-glx
+Maintainer: rep <pierre@314r.net>
+Description: Demo style
+Homepage: http://314r.net
