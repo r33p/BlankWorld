@@ -11,113 +11,116 @@
 
 #include <stdio.h>
 #include <iostream>
-#include <cstdlib> // rand()
+#include <cstdlib>		// rand()
+#include "GLShader.hpp"	// glsl file loader
 
-#include "GLShader.hpp"
 #include "Cube.class.hpp"
 
-// VARIABLES GLOBALES
+cube::cube(){};
+cube::~cube(){}
 
-
-
-cube::cube(){}
-
-
-void cube::setup_TEXTURES(){
-		// ---------------------------------------------------------- IMAGES 
+void cube::setup(){
+	// --------------------------------------------------------- TEXTURE 
 	glGenTextures(2, textures);
-	}
-
-void cube::setup_VBO(){
+	
 	// ------------------------------------------------------------- VBO
 	// création du VBO
 	glGenBuffers(1, &vbo); // Generate 1 buffer
-	// -------------------------------------------------------- VERTICES
- 	for (int i=0;i<points*7;i++){
-		cube::vertices[i] = (float)0.0;
- 	}
+	// VERTICES
+ 	// reset 0
+ 	for (int i=0;i<points*7;i++){cube::vertices[i] = (float)0.0;}
  	
- 	for (int i=0;i<points;i++){
+ 	// X
+ 	float offset = 1;
+ 	for (int i=0;i<points;i++)	
+ 	{ 
+		float truc = (float)i;
+		cube::vertices[i*7] = (truc / 512.0) - offset ;
+	}
+	
+	// COLOR
+ 	for (int i=0;i<points;i++)	
+ 	{
 		cube::vertices[i*7+2] = (float)1.0;
  	}
  	
- 	for (int i=0;i<points;i++){
-		float truc = (float)i;
-		cube::vertices[i*7] = truc / 40.0;
-	}
-
 	glBindBuffer(GL_ARRAY_BUFFER, vbo); // rendre le buffer actif
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // uploader le VBO
 	
-	// ---------------------------------------- VERTEX ATTRIBUTE OBJECTS
+	// ------------------------------------------------------------- VAO
 	// stocke les liens entre un VBO et ses attributs
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
 	
 	// ------------------------------------------------------------- EBO
-	// ça sert à gérer des index de points (comme dans les fichiers obj)
+	// points indexes (.obj)
 	glGenBuffers(1, &ebo);
 	GLuint elements[points];
 	// rattachement
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER,sizeof(elements), elements, GL_STATIC_DRAW);
 	
-}
-
-void cube::setup_GLSL(){
+	
+	// ------------------------------------------------------------ GLSL
 	programGLSL = LoadShader("Cube.vert", "Cube.geom", "Cube.frag");
 	printf(" PROGRAM GLSL USE: %i \n",programGLSL);
 	glUseProgram(programGLSL);
 
-	// -------------------------------------------------- VERTEX ATTRIBS	
+	//  VERTEX ATTRIBS	
 	GLint posAttrib = glGetAttribLocation(programGLSL, "position");
 	glEnableVertexAttribArray(posAttrib);
 	// comment sont formatées nos données de vertex :
 	glVertexAttribPointer(posAttrib, 2, GL_FLOAT, GL_FALSE, 7* sizeof(GLfloat), 0);
-	// ------------------------------------------------ FRAGMENT ATTRIBS	
+	// FRAGMENT ATTRIBS	
 	GLint colAttrib = glGetAttribLocation(programGLSL, "color");
     glEnableVertexAttribArray(colAttrib);
     glVertexAttribPointer(colAttrib, 3, GL_FLOAT, GL_FALSE, 7 * sizeof(GLfloat), (void*)(2 * sizeof(GLfloat)));
-    // ------------------------------------------------- TEXTURE ATTRIBS
+    // TEXTURE ATTRIBS
     GLint texAttrib = glGetAttribLocation(programGLSL, "texcoord");
     glEnableVertexAttribArray(texAttrib);
     glVertexAttribPointer(texAttrib, 2, GL_FLOAT, GL_FALSE, 7*sizeof(float), (void*)(5*sizeof(float)));
-}
-
-void cube::setup_MATRICES(){
-	uniModel	= glGetUniformLocation(programGLSL, "model");
+    
+    
+    // -------------------------------------------------------- MATRICES
+    // MODEL
+    uniModel	= glGetUniformLocation(programGLSL, "model");
 	uniView		= glGetUniformLocation(programGLSL, "view");
 	uniProj		= glGetUniformLocation(programGLSL, "proj");
-	// ----------------------------------------------------------- VIEW
+	// VIEW
     view = glm::lookAt(
-    glm::vec3(1.2f, 1.2f, 1.2f),
-    glm::vec3(0.0f, 0.0f, 0.0f),
-    glm::vec3(0.0f, 1.0f, 0.0f));
-	// ------------------------------------------------------------ PROJ
-	proj = glm::perspective(glm::degrees(22.5f), 1024.0f / 512.0f, 1.0f, 20.0f);
-
+    glm::vec3(1.2f, 1.2f, 1.2f), 	// position
+    glm::vec3(0.0f, 0.0f, 0.0f),	// focus point
+    glm::vec3(0.0f, 1.0f, 0.0f));	// up vector
+	// PROJ
+	proj = glm::perspective(glm::degrees(22.5f), 1024.0f / 256.0f, 1.0f, 20.0f);
+	
+	// BIND
 	glUniformMatrix4fv(uniModel, 1, GL_FALSE, glm::value_ptr(model));
 	glUniformMatrix4fv(uniView, 1, GL_FALSE, glm::value_ptr(view));
 	glUniformMatrix4fv(uniProj, 1, GL_FALSE, glm::value_ptr(proj));
 }
 
-/*float randoom(){
-	float hasard;
-	hasard = (float)(rand() % 100 + 1) / 300;
-	return hasard;
-}*/
-
-void cube::update_VBO(){
+void cube::update(signed short* ptr_buuff){
 	for (int i=0;i<points;i++){
+		
 		//vertices[i*7+1] = randoom();
-		vertices[i*7+1] = (float)(rand() % 100 + 1) / 300;
+		//vertices[i*7+1] = (float)(rand() % 100 + 1) / 300;
+		
+		// affectation au Y des données du buffer audio
+		vertices[i*7+1] = (float)ptr_buuff[i] / 50000.0;
+		
 	}
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STREAM_DRAW);
 	
 	// ------------------------------------------------------------ DRAW
 	// FAIRE BIEN ATTENTION ICI
 	// DRAW ARRAY OU DRAW ELEMENT : C'EST PAS LA MEME CHOSE...
-	//
 	//glDrawElements(GL_POINTS, 4096, GL_UNSIGNED_INT, 0);
-	glDrawArrays(GL_POINTS, 0 , points);
+	glDrawArrays(GL_LINES, 0 , points);
+}
+
+void cube::nettoyage(){
+	glDeleteProgram(programGLSL); // OpenGL
+    glDeleteBuffers(1, &vbo);
+    glDeleteVertexArrays(1, &vao);
 }

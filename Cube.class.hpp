@@ -5,22 +5,21 @@ class cube
 	
 	// variables publique
 	GLuint		vbo, ebo, vao;								// VBO
-	int 		points=8;										//
-	float		vertices[8*7];								//
+	static const int 	points=1024;						//
+	float		vertices[points*7];							//
 	GLuint		textures[2];								// TEXTURES
 	GLuint		vertexShader, fragmentShader, programGLSL;	// SHADERS
 	GLint 		uniModel,	uniView,	uniProj,	uniTime;// OGL
 	glm::mat4 	model,		view, 		proj;				// MATRICES
 	
-	// contructeur
+	// construct destruct
 	cube();
+	~cube();
 	
 	// méthodes
-	void setup_VBO();
-	void setup_GLSL();
-	void setup_TEXTURES();
-	void setup_MATRICES();
-	void update_VBO();
+	void setup();
+	void update(signed short*);
+	void nettoyage();
 };
 
 
