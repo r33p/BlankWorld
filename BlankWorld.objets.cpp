@@ -95,7 +95,7 @@ void rendu(cube* c){
     //for(int i=0; i<1; i++)
     {		
 		glfwGetCursorPos(window, &xpos, &ypos);
-		printf("MOUSE POS : X:%f Y:%f\n", xpos, ypos);
+		//printf("MOUSE POS : X:%f Y:%f\n", xpos, ypos);
 		
 		//usleep(1000000);	// -------------- FPS CONTROL (µ_seconds)
 		// ------------------------------------------------------- CLEAR
