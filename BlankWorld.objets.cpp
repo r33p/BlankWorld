@@ -1,3 +1,8 @@
+// V2
+// COMPILER		: g++ -Wall -c "%f" -lrtaudio -std=c++11
+// CONSTRUIRE	: g++ -Wall -o "%e" "%f" GLShader.cpp Cube.class.cpp -lrtaudio -lglfw -lGLEW -lGL -std=c++11
+
+// V1 ?
 // BlankWorld.cpp point.cpp point.hpp Spectrum.GLShader.hpp	[Spectrum.vert, etc]
 // g++ -Wall -c ./BlankWorld.objets.cpp -lrtaudio -std=c++11 -g
 // g++ -Wall -o ./BlankWorld.objets ./BlankWorld.objets.cpp point.cpp Spectrum.GLShader.cpp -lrtaudio -lglfw -lGLEW -lGL -std=c++11 -g
